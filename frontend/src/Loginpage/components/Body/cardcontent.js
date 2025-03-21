@@ -1,0 +1,14 @@
+const cardcontent = [
+    {
+        key: 1,
+        title: "Name*",
+        value: "Your Name"
+    },
+    {
+        key: 2,
+        title: "Email / Roll Number*",
+        value: "Your email (abc@gmail.com)"
+    }
+];
+
+export default cardcontent;

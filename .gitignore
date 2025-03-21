@@ -1,0 +1,11 @@
+# Ignore node_modules
+node_modules/
+# Handle line endings automatically for text files
+* text=auto
+
+# Force LF line endings for scripts
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf

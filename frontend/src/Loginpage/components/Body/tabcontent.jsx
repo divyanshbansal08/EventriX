@@ -1,0 +1,143 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cards from "./cards";
+import Button from "./button";
+import Tabhead from "./tabhead";
+import { motion, AnimatePresence } from "framer-motion";
+
+function Tabscontent() {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmpassword, setConfirmpassword] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const [messageKey, setMessageKey] = useState(0);
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setSuccess('');
+
+        if (password.length < 6) {
+            setError('Password should be at least 6 characters long');
+            setMessageKey(prevKey => prevKey + 1);
+            return;
+        }
+        if (password != confirmpassword) {
+            setError('Password is not same');
+            setMessageKey(prevKey => prevKey + 1);
+            return;
+        }
+        try {
+            const response = await axios.post('http://localhost:5000/api/signin', {
+                username,
+                email,
+                password
+            });
+
+            if (response.data.success) {
+                setError('');
+                setSuccess(response.data.message);
+                setTimeout(() => {
+                    navigate("/home");
+                }, 1000);
+            } else {
+                setError(response.data.message);
+                setMessageKey(prevKey => prevKey + 1);
+            }
+        } catch (error) {
+            if (error.response && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError('An error occurred. Please try again.');
+            }
+            setMessageKey(prevKey => prevKey + 1);
+            setSuccess('');
+        }
+    };
+
+    return (<div className="signup-tab-content">
+        <Tabhead title="Sign Up" />
+        <div className="signup_signup-form-block">
+            <form className="signup_signup-form" onSubmit={handleSubmit}>
+
+                <Cards
+                    key={1}
+                    title="Name*"
+                    placeholder="Enter Name"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <Cards
+                    key={2}
+                    title="Email / Roll Number*"
+                    placeholder="Your email (abc@gmail.com)"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <div className="signup_form_field-wrapper">
+                    <label className="signup_form_field-label">Password*</label>
+                    <input
+                        className="signup_form_input signup_form_input-1"
+                        type="password"
+                        placeholder="Enter Password"
+                        value={password}
+                        onChange={(e) => {
+                            const newPassword = e.target.value;
+                            setPassword(newPassword);
+
+                        }}
+                    />
+                </div>
+                <div className="signup_form_field-wrapper">
+                    <label className="signup_form_field-label">Confirm Password*</label>
+                    <input
+                        className="signup_form_input signup_form_input-1"
+                        type="password"
+                        placeholder="Confirm Password"
+                        value={confirmpassword}
+                        onChange={(e) => {
+                            const newConfirmpassword = e.target.value;
+                            setConfirmpassword(newConfirmpassword);
+                        }}
+                    />
+                </div>
+                <Button />
+
+                <AnimatePresence mode="wait">
+                    {error && (
+                        <motion.div
+                            key={messageKey}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.3 }}
+                            className="login_message login_message-error"
+                        >
+                            {error}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                    {success && (
+                        <motion.div
+                            key="success"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.3 }}
+                            className="login_message login_message-success"
+                        >
+                            {success}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </form>
+        </div>
+    </div>);
+}
+export default Tabscontent;
