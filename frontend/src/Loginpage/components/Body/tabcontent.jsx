@@ -32,7 +32,7 @@ function Tabscontent() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:5000/api/signin', {
+            const response = await axios.post('http://localhost:5000/api/auth/signin', {
                 username,
                 email,
                 password
@@ -42,7 +42,7 @@ function Tabscontent() {
                 setError('');
                 setSuccess(response.data.message);
                 setTimeout(() => {
-                    navigate("/home");
+                    navigate("/login");
                 }, 1000);
             } else {
                 setError(response.data.message);

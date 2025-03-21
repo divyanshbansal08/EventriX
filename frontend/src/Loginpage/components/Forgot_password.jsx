@@ -20,7 +20,7 @@ function ForgotPassword() {
         setSuccess('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/send-otp', { email });
+            const response = await axios.post('http://localhost:5000/api/otp/send-otp', { email });
             if (response.data.success) {
                 setSuccess('OTP sent to your email.');
                 setShowOtpInput(true);
@@ -44,7 +44,7 @@ function ForgotPassword() {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/verify-otp', { email, otp });
+            const response = await axios.post('http://localhost:5000/api/otp/verify-otp', { email, otp });
             if (response.data.success) {
                 setShowPasswordInput(true);
                 setSuccess('OTP verified. Set your new password.');
@@ -67,7 +67,7 @@ function ForgotPassword() {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/reset-password', { email, newPassword });
+            const response = await axios.post('http://localhost:5000/api/user/reset-password', { email, newPassword });
             if (response.data.success) {
                 setSuccess('Password reset successful. Redirecting to login page...');
                 setTimeout(() => navigate('/home'), 2000);

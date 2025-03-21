@@ -13,6 +13,11 @@ function Right_Logo() {
             >
                 Login
             </div>
+            <div className="homepage_right-logo-div-0 homepage_button-0 homepage_button-1 homepage_hover-button "
+                onClick={() => {
+                    localStorage.removeItem('token');
+                    navigate('/login');
+                }}>Logout</div>
         </div>
     );
 }

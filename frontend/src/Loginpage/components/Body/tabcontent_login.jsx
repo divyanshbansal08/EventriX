@@ -18,18 +18,20 @@ function Tabscontent_login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSuccess('');
-
         try {
-            const response = await axios.post('http://localhost:5000/api/login', {
+            console.log("Sending request to backend...");
+            const response = await axios.post('http://localhost:5000/api/auth/login', {
                 username,
                 password
             });
+            console.log("Response from backend:", response.data);
 
             if (response.data.success) {
-                setSuccess('Login successful!');
+                setSuccess(response.data.message);
                 setError('');
+                localStorage.setItem('token', response.data.token);
                 setTimeout(() => {
-                    navigate("/home");
+                    window.location.href = "/home";
                 }, 1000);
             } else {
                 setError(response.data.message);

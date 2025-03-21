@@ -7,6 +7,8 @@ import Councilspage from '../../Councilspage/components_Councilspage/Councilspag
 import '../../Councilspage/styles_Councilspage/styles_councilspage.css'
 import Logo_main from '../../Homepage/components_Homepage/Logo_main';
 import ForgotPassword from './Forgot_password';
+import Dashboard from './dashboard';
+import ProtectedRoute from './protectedroute';
 
 function App() {
   return (
@@ -15,8 +17,21 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/councils" element={<Councilspage />} />
+        <Route path="/home" element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/councils" element={
+          <ProtectedRoute>
+            <Councilspage />
+          </ProtectedRoute>
+        } />
       </Routes>
     </div>
   );
