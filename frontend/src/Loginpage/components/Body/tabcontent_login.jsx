@@ -8,7 +8,7 @@ import cardcontent_login from "./cardcontent_login";
 import { motion, AnimatePresence } from "framer-motion";
 
 function Tabscontent_login() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -21,7 +21,7 @@ function Tabscontent_login() {
         try {
             console.log("Sending request to backend...");
             const response = await axios.post('http://localhost:5000/api/auth/login', {
-                username,
+                email,
                 password
             });
             console.log("Response from backend:", response.data);
@@ -58,8 +58,8 @@ function Tabscontent_login() {
                             key={Carditem.key}
                             title={Carditem.title}
                             placeholder={Carditem.value}
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     ))}
 

@@ -1,17 +1,17 @@
 import { users, hashPassword, comparePasswords } from '../services/userService.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-
+import User from '../models/User.js';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 // Login
 
 export const logIN = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     console.log("Received data:", req.body);
 
     // Find user by username only (NOT password)
-    const user = users.find(user => user.username === username);
+    const user = await User.findOne({ email });
 
     if (!user) {
         return res.status(400).json({ success: false, message: "Invalid credentials" });
@@ -21,7 +21,7 @@ export const logIN = async (req, res) => {
     const isPasswordValid = await comparePasswords(password, user.password);
     if (isPasswordValid) {
         // Generate JWT token
-        const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ success: true, token, message: "Login successful" });
     } else {
         res.status(400).json({ success: false, message: "Invalid credentials" });
@@ -45,6 +45,7 @@ export const signIN = async (req, res) => {
     }
 
     const hashedPassword = await hashPassword(password);
-    users.push({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, password: hashedPassword });
+    await newUser.save();
     res.json({ success: true, message: "Signup successful" });
 };
