@@ -14,7 +14,11 @@
 }
 
 body {
-  height: 100vh;
+  height: 100%;
+}
+
+.App {
+  height: 100%;
 }
 
 form {
@@ -52,12 +56,13 @@ input {
   font-family: system-ui;
   font-size: 1rem;
   line-height: 1.5;
-
+  height: 100%;
 }
 
 .main_wrapper_signin-1 {
   padding-right: 5%;
   padding-left: 5%;
+  height: 100%;
 }
 
 .main_wrapper_signin-2 {

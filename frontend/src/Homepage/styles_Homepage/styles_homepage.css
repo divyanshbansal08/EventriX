@@ -363,18 +363,13 @@ html,
     margin: 0;
     padding: 0;
     width: 100%;
+}
+
+#root {
     height: 100%;
 }
 
 .homepage_main-div-0 {
     position: relative;
     z-index: 1;
-}
-
-body {
-    background-image: url('../Assets_Homepage/marvels-spider-man--11990.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
 }
