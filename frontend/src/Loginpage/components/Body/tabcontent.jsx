@@ -114,7 +114,7 @@ function Tabscontent() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0 }}
                             className="login_message login_message-error"
                         >
                             {error}
@@ -129,7 +129,7 @@ function Tabscontent() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0 }}
                             className="login_message login_message-success"
                         >
                             {success}

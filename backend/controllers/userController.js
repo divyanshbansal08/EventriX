@@ -1,6 +1,8 @@
 import { users } from "../services/userService.js";
 
-const resetPassword = async (req, res) => {
+// reset password
+
+export const resetPassword = async (req, res) => {
     const { email, newPassword } = req.body;
 
     const user = users.find(user => user.email === email && user.password === newPassword);
@@ -15,4 +17,21 @@ const resetPassword = async (req, res) => {
     res.json({ success: true, message: 'Password reset successful' });
 };
 
-export default resetPassword;
+
+// search function
+
+export const search = async (req, res) => {
+    const { search } = req.body;
+    console.log("Received data:", req.body);
+
+    if (!search) return res.status(400).json({ success: false, page: '', message: 'Enter a query.' });
+
+    const validSearchTerms = ['home', 'login', 'signin', 'councils'];
+
+    if (validSearchTerms.includes(search.toLowerCase())) {
+        res.json({ success: true, page: search.toLowerCase(), message: 'Search successful, redirecting...' });
+    }
+    else {
+        res.status(400).json({ success: false, page: 'does not exist', message: 'Query does not exist.' });
+    }
+};
