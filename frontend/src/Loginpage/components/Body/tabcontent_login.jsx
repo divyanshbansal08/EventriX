@@ -95,25 +95,43 @@ function Tabscontent_login() {
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     transition={{ duration: 0 }}
                                     className="login_message login_message-error"
-                                    style={{ position: "absolute", top: "-18px", left: "0", right: "0", textAlign: "center" }}
+                                    style={{ 
+                                        position: "absolute", 
+                                        top: "-18px", 
+                                        left: "0", 
+                                        right: "0", 
+                                        textAlign: "center",
+                                        pointerEvents: "none" // Prevent error from blocking clicks
+                                    }}
                                 >
                                     {error}
                                 </motion.div>
                             )}
                         </AnimatePresence>
                         {success && (
-                            <div className="login_message login_message-success" style={{ position: "absolute", top: "-18px", left: "0", right: "0", textAlign: "center" }}>
+                            <div 
+                                className="login_message login_message-success" 
+                                style={{ 
+                                    position: "absolute", 
+                                    top: "-18px", 
+                                    left: "0", 
+                                    right: "0", 
+                                    textAlign: "center",
+                                    pointerEvents: "none" // Just to be consistent
+                                }}
+                            >
                                 {success}
                             </div>
                         )}
                     </div>
 
-
-
                     <div className="noaccount_login">
                         <div
                             className="noaccount_login-1"
-                            onClick={() => navigate("/signin")}
+                            onClick={() => {
+                                setError(''); // Clear error state
+                                navigate("/signin");
+                            }}
                             style={{ cursor: "pointer", color: "white", textDecoration: "underline" }}
                         >
                             Don't have an account? Sign up
@@ -126,5 +144,3 @@ function Tabscontent_login() {
 }
 
 export default Tabscontent_login;
-
-
