@@ -98,7 +98,7 @@ function ForgotPassword() {
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.8 }}
-                                transition={{ duration: 0.3 }}
+                                transition={{ duration: 0 }}
                                 className="login_message login_message-error forgotpassword-message"
                                 style={{ position: "absolute", top: "-18px", left: "0", right: "0", textAlign: "center" }}
                             >

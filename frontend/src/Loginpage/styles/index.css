@@ -591,4 +591,5 @@ p {
 .forgotpassword-message {
   align-self: center;
   max-width: 30%;
+  justify-self: center;
 }
