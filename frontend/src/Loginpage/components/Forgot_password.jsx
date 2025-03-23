@@ -70,7 +70,7 @@ function ForgotPassword() {
             const response = await axios.post('http://localhost:5000/api/user/reset-password', { email, newPassword });
             if (response.data.success) {
                 setSuccess('Password reset successful. Redirecting to login page...');
-                setTimeout(() => navigate('/home'), 2000);
+                setTimeout(() => navigate('/login'), 2000);
             } else {
                 setError(response.data.message);
             }

@@ -6,20 +6,19 @@ import cors from 'cors';
 const app = express();
 
 import User from './models/User.js';
-import { users } from './services/userService.js';
-import { initializeUsers } from './services/userService.js';
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-await initializeUsers();
-console.log(users);
+// Services
+import './services/eventnotifierService.js';
 
 // Routes
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
-import otpRoutes from './routes/otpRoutes.js'
+import eventRoutes from './routes/eventRoutes.js';
+import otpRoutes from './routes/otpRoutes.js';
 import { verifyToken } from './middlewares/authMiddleware.js';
 
 mongoose.connect(process.env.MONGO_URI)
@@ -32,6 +31,7 @@ app.get('/api/protected', verifyToken, (req, res) => {
 });
 app.use('/api/user', userRoutes);
 app.use('/api/otp', otpRoutes);
+app.use('/api/event', eventRoutes);
 
 // Checking users in db
 app.get('/check-users', async (req, res) => {
