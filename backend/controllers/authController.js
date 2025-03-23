@@ -35,11 +35,19 @@ export const logIN = async (req, res) => {
 
 export const signIN = async (req, res) => {
     const { username, email, password } = req.body;
+    if (!username) {
+        return res.status(400).json({ success: false, message: "Enter username." });
+    }
+    if (!email) {
+        return res.status(400).json({ success: false, message: "Enter email." });
+    }
+    if (!password) {
+        return res.status(400).json({ success: false, message: "Enter password." });
+    }
+
     const user = await User.findOne({ email });
 
-    const userExists = (user.username === username || user.email === email);
-
-    if (userExists) {
+    if (user) {
         return res.status(400).json({ success: false, message: "User already exists" });
     }
 
