@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 function Tabscontent_login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [messageKey, setMessageKey] = useState(0);
@@ -74,13 +75,28 @@ function Tabscontent_login() {
                                 Forgot your password?
                             </div>
                         </div>
-                        <input
-                            className="signup_form_input signup_form_input-1"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div style={{ position: "relative" }}>
+                            <input
+                                className="signup_form_input signup_form_input-1"
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <span
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{ 
+                                    position: "absolute", 
+                                    right: "10px", 
+                                    top: "50%", 
+                                    transform: "translateY(-50%)", 
+                                    cursor: "pointer", 
+                                    color: "white"
+                                }}
+                            >
+                                {showPassword ? "🙈" : "👁️"}
+                            </span>
+                        </div>
                     </div>
 
                     <Button />
@@ -101,7 +117,7 @@ function Tabscontent_login() {
                                         left: "0", 
                                         right: "0", 
                                         textAlign: "center",
-                                        pointerEvents: "none" // Prevent error from blocking clicks
+                                        pointerEvents: "none" 
                                     }}
                                 >
                                     {error}
@@ -117,7 +133,7 @@ function Tabscontent_login() {
                                     left: "0", 
                                     right: "0", 
                                     textAlign: "center",
-                                    pointerEvents: "none" // Just to be consistent
+                                    pointerEvents: "none" 
                                 }}
                             >
                                 {success}
@@ -129,7 +145,7 @@ function Tabscontent_login() {
                         <div
                             className="noaccount_login-1"
                             onClick={() => {
-                                setError(''); // Clear error state
+                                setError(''); 
                                 navigate("/signin");
                             }}
                             style={{ cursor: "pointer", color: "white", textDecoration: "underline" }}

@@ -14,6 +14,8 @@ function Tabscontent() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [messageKey, setMessageKey] = useState(0);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -26,7 +28,7 @@ function Tabscontent() {
             setMessageKey(prevKey => prevKey + 1);
             return;
         }
-        if (password != confirmpassword) {
+        if (password !== confirmpassword) {
             setError('Password is not same');
             setMessageKey(prevKey => prevKey + 1);
             return;
@@ -80,30 +82,49 @@ function Tabscontent() {
                 />
                 <div className="signup_form_field-wrapper">
                     <label className="signup_form_field-label">Password*</label>
-                    <input
-                        className="signup_form_input signup_form_input-1"
-                        type="password"
-                        placeholder="Enter Password"
-                        value={password}
-                        onChange={(e) => {
-                            const newPassword = e.target.value;
-                            setPassword(newPassword);
-
-                        }}
-                    />
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <input
+                            className="signup_form_input signup_form_input-1"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <span
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={{ position: "absolute", 
+                                right: "10px", 
+                                top: "70%", 
+                                transform: "translateY(-50%)", 
+                                cursor: "pointer", 
+                                color: "white" }}
+                        >
+                            {showPassword ? "🙈" : "👁️"}
+                        </span>
+                    </div>
                 </div>
                 <div className="signup_form_field-wrapper">
                     <label className="signup_form_field-label">Confirm Password*</label>
-                    <input
-                        className="signup_form_input signup_form_input-1"
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={confirmpassword}
-                        onChange={(e) => {
-                            const newConfirmpassword = e.target.value;
-                            setConfirmpassword(newConfirmpassword);
-                        }}
-                    />
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <input
+                            className="signup_form_input signup_form_input-1"
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder="Confirm Password"
+                            value={confirmpassword}
+                            onChange={(e) => setConfirmpassword(e.target.value)}
+                        />
+                        <span
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            style={{ position: "absolute", 
+                                right: "10px", 
+                                top: "70%", 
+                                transform: "translateY(-50%)", 
+                                cursor: "pointer", 
+                                color: "white" }}
+                        >
+                            {showConfirmPassword ? "🙈" : "👁️"}
+                        </span>
+                    </div>
                 </div>
                 <Button />
 
