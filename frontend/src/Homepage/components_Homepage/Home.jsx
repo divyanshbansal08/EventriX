@@ -40,7 +40,7 @@ function Home() {
         navigate("/login");
     };
 
-    // Define animation properties. If arriving with loggedOut state, animate in.
+    // Define animation properties.
     const animationProps =
         location.state && location.state.loggedOut
             ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.5 } }
@@ -64,32 +64,18 @@ function Home() {
                 }}
             />
 
-            {/* Top-right Button */}
-            <div className="homepage_right-logo-wrapper">
-                {isLoggedIn ? (
-                    <button onClick={handleLogout} className="logout-button">
-                        Logout
-                    </button>
-                ) : (
-                    <button onClick={handleLogin} className="login-button">
-                        Login
-                    </button>
-                )}
-                {/* </div> */}
-            </div>
-
+            {/* Logo_main receives onLogout, onLogin, and isLoggedIn status */}
+            <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
 
             {/* Animated Main Content */}
             <motion.div
                 {...animationProps}
                 onAnimationComplete={() => {
-                    // After fade-out, navigate to /home with loggedOut state so that the login button is shown.
                     if (isExiting) {
                         navigate("/home", { state: { loggedOut: true } });
                     }
                 }}
             >
-                <Logo_main />
                 <Body />
             </motion.div>
 
