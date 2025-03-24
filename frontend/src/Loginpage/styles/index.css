@@ -593,3 +593,7 @@ p {
   max-width: 30%;
   justify-self: center;
 }
+
+.signup_form_field-wrapper-temp {
+  margin-bottom: 10%;
+}

@@ -35,31 +35,22 @@ export const logIN = async (req, res) => {
 
 export const signIN = async (req, res) => {
     const { username, email, password } = req.body;
-    if (!username) {
-        return res.status(400).json({ success: false, message: "Enter username." });
-    }
-    if (!email) {
-        return res.status(400).json({ success: false, message: "Enter email." });
-    }
-    if (!password) {
-        return res.status(400).json({ success: false, message: "Enter password." });
-    }
 
     const user = await User.findOne({ email });
 
-    if (user) {
-        return res.status(400).json({ success: false, message: "User already exists" });
+    if (!user) {
+        return res.status(400).json({ success: false, message: "User not found. Please verify OTP first." });
     }
 
-    if (password.length < 6) {
-        return res.status(400).json({ success: false, message: "Password should be at least 6 characters long" });
+    if (!user.verified) {
+        return res.status(400).json({ success: false, message: "Please verify your OTP before signing up." });
     }
 
     const hashedPassword = await hashPassword(password);
+    user.username = username;
+    user.password = hashedPassword;
 
-    // Creating new user
-    const newUser = new User({ username, email, password: hashedPassword });
-    await newUser.save();
+    await user.save();
 
-    res.json({ success: true, message: "Signup successful" });
+    res.json({ success: true, message: "Signup successful." });
 };

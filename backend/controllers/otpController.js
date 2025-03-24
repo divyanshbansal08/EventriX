@@ -6,60 +6,68 @@ import User from '../models/User.js';
 export const sendOTP = async (req, res) => {
     const { email } = req.body;
 
-    if (!email) return res.status(400).json({ success: false, message: 'Email is required.' });
+    if (!email) {
+        console.log(`OTP sent successfully0 to ${email}`);
+        return res.status(400).json({ success: false, message: 'Email is required.' });
+    }
 
     try {
         const user = await User.findOne({ email });
 
-        if (!user) {
-            return res.status(404).json({ success: false, message: 'User not found.' });
+        if (user && user.verified) {
+            console.log(`OTP sent successfully1 to ${email}`);
+
+            return res.status(400).json({ success: false, message: 'User is already verified.' });
         }
+
         const otp = generateOTP();
         const otpExpiry = Date.now() + 5 * 60 * 1000;
-        user.otp = otp;
-        user.otpExpiry = otpExpiry;
+
+        if (user) {
+            console.log(`OTP sent successfully2 to ${email}`);
+
+            user.otp = otp;
+            user.otpExpiry = otpExpiry;
+            await user.save();
+        } else {
+            console.log(`OTP sent successfully3 to ${email}`);
+
+            const newUser = new User({ email, otp, otpExpiry });
+            await newUser.save();
+        }
 
         await sendMail(email, otp);
-        await user.save();
+        console.log(`OTP sent successfully4 to ${email}`);
         res.json({ success: true, message: 'OTP sent to your email.' });
     } catch (error) {
+        console.error('Error in sending OTP:', error);
         res.status(500).json({ success: false, message: 'Error sending OTP.' });
     }
 };
 
-// verify otp
-
+// Verify OTP
 export const verifyOTP = async (req, res) => {
     const { email, otp } = req.body;
-
-    if (!email || !otp) {
-        return res.status(400).json({ success: false, message: 'Email and OTP are required.' });
-    }
 
     try {
         const user = await User.findOne({ email });
 
-        if (!user || !user.otp || !user.otpExpiry) {
-            return res.status(400).json({ success: false, message: 'No OTP found for this email.' });
-        }
+        if (!user) return res.status(400).json({ success: false, message: 'User not found.' });
 
         if (Date.now() > user.otpExpiry) {
-            user.otp = null;
-            user.otpExpiry = null;
-            await user.save();
             return res.status(400).json({ success: false, message: 'OTP has expired.' });
         }
 
-        if (otp !== user.otp) {
+        if (user.otp !== otp) {
             return res.status(400).json({ success: false, message: 'Invalid OTP. Please try again.' });
         }
 
-        //Clear OTP from the database
-        user.otp = null;
-        user.otpExpiry = null;
+        user.verified = true;
+        user.otp = undefined;
+        user.otpExpiry = undefined;
         await user.save();
 
-        res.json({ success: true, message: 'OTP verified successfully. Proceed to reset your password.' });
+        res.json({ success: true, message: 'OTP verified successfully. Proceed to signin.' });
     } catch (error) {
         res.status(500).json({ success: false, message: 'Error verifying OTP.' });
     }
