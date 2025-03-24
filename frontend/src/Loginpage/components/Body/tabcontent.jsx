@@ -58,21 +58,27 @@ function Tabscontent() {
         e.preventDefault();
         setSuccess('');
         try {
+            console.log("Verifying OTP...");
             const otpResponse = await axios.post('http://localhost:5000/api/otp/verify-otp', { email, otp });
-
+            console.log("Verified OTP...");
             if (otpResponse.data.success) {
+                console.log("Verified OTP... Success");
                 const signUpResponse = await axios.post('http://localhost:5000/api/auth/signin', { username, email, password });
-
+                console.log("Verified OTP... Success... Signin");
                 if (signUpResponse.data.success) {
+                    console.log("Verified OTP... Success... Signin Success");
                     setSuccess('Signup successful. Redirecting to login...');
                     setTimeout(() => navigate("/login"), 2000);
                 } else {
+                    console.log("Verified OTP... Success... Signin Fail");
                     setError(signUpResponse.data.message);
                 }
             } else {
+                console.log("Verified OTP... Fail");
                 setError(otpResponse.data.message);
             }
         } catch (error) {
+            console.log("Verified OTP... Success... Signin Success error");
             setError('An error occurred. Please try again.');
         }
         setMessageKey(prevKey => prevKey + 1);

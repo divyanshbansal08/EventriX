@@ -7,7 +7,7 @@ const cardcontent = [
     {
         key: 2,
         title: "Email / Roll Number*",
-        value: "Your email (abc@gmail.com)"
+        value: "Your email (abc@iitk.ac.in)"
     }
 ];
 

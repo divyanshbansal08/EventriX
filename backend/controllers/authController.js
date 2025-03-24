@@ -2,55 +2,95 @@ import { hashPassword, comparePasswords } from '../services/userService.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
+
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@iitk\.ac\.in$/;
 
 // Login
-
 export const logIN = async (req, res) => {
-    const { email, password } = req.body;
-    console.log("Received data:", req.body);
+    try {
+        const { email, password } = req.body;
+        console.log("Received data:", req.body);
+        if (!email) {
+            return res.status(400).json({ message: "Enter email." });
+        }
+        if (!password) {
+            return res.status(400).json({ message: "Enter password." });
+        }
+        // Validate email domain
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ success: false, message: "Only @iitk.ac.in emails are allowed" });
+        }
 
-    // Find user by email
-    const user = await User.findOne({ email });
-
-    if (!user) {
-        return res.status(400).json({ success: false, message: "User does not exist" });
-    }
-    console.log(user);
-    // Compare hashed password
-    const isPasswordValid = await comparePasswords(password, user.password);
-
-    if (isPasswordValid) {
-        // Generate JWT token
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ success: true, token, message: "Login successful" });
-    } else {
-        res.status(400).json({ success: false, message: "Invalid credentials" });
+        // Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ success: false, message: "User does not exist" });
+        }
+        console.log(user);
+        if (!user.verified) {
+            return res.status(400).json({ message: "Please verify your email before logging in." });
+        }
+        // Compare hashed password
+        const isPasswordValid = await comparePasswords(password, user.password);
+        if (isPasswordValid) {
+            // Generate JWT token
+            const token = jwt.sign({ email: user.email, username: user.username }, jwtSecret, { expiresIn: '1h' });
+            res.json({ success: true, token, message: "Login successful" });
+        } else {
+            res.status(400).json({ success: false, message: "Invalid credentials" });
+        }
+    } catch (err) {
+        console.error("Login Error:", err);
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
 
-
-// Signin
-
+// Signup
 export const signIN = async (req, res) => {
-    const { username, email, password } = req.body;
+    try {
+        console.log("Signing in...");
+        const { username, email, password } = req.body;
 
-    const user = await User.findOne({ email });
+        if (!username) {
+            console.log("Enter username.");
+            return res.status(400).json({ success: false, message: "Enter username." });
+        }
+        if (!email) {
+            console.log("Enter email.");
+            return res.status(400).json({ success: false, message: "Enter email." });
+        }
+        if (!password) {
+            console.log("Enter password.");
+            return res.status(400).json({ success: false, message: "Enter password." });
+        }
 
-    if (!user) {
-        return res.status(400).json({ success: false, message: "User not found. Please verify OTP first." });
+        // Validate email domain
+        if (!emailRegex.test(email)) {
+            console.log("Only @iitk.ac.in emails are allowed.");
+            return res.status(400).json({ success: false, message: "Only @iitk.ac.in emails are allowed" });
+        }
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: "User not found. Please verify OTP first." });
+        }
+
+        if (!user.verified) {
+            return res.status(400).json({ success: false, message: "Please verify your OTP before signing up." });
+        }
+
+        const hashedPassword = await hashPassword(password);
+        user.username = username;
+        user.password = hashedPassword;
+
+        await user.save();
+
+        console.log("Signup successful.");
+        res.json({ success: true, message: "Signup successful" });
+    } catch (err) {
+        console.error("Signup Error:", err);
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
-
-    if (!user.verified) {
-        return res.status(400).json({ success: false, message: "Please verify your OTP before signing up." });
-    }
-
-    const hashedPassword = await hashPassword(password);
-    user.username = username;
-    user.password = hashedPassword;
-
-    await user.save();
-
-    res.json({ success: true, message: "Signup successful." });
 };
