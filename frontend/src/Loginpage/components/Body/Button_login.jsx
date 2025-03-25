@@ -1,11 +1,11 @@
 import React from "react";
 import Subbutton from "./subbutton";
 import Subbutton1 from "./subbutton1";
-function Button() {
+function Button_login() {
     return (<div className="signup_form-button-wrapper">
         <Subbutton
-            value="Signin" />
-        <Subbutton1 value="Sign up with Google" />
+            value="Log in" />
+        <Subbutton1 value="Log in with Google" />
     </div>);
 }
-export default Button;
+export default Button_login;

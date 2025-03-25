@@ -1,6 +1,6 @@
 
 import User from "../models/User.js";
-import { hashPassword } from "../services/userService.js";
+import { comparePasswords, hashPassword } from "../services/userService.js";
 
 // reset password
 
@@ -21,6 +21,55 @@ export const resetPassword = async (req, res) => {
     res.json({ success: true, message: 'Password reset successful' });
 };
 
+// change password
+export const changePassword = async (req, res) => {
+
+    try {
+        console.log("Changing password...");
+
+        const { username, currentPassword, newPassword, confirmNewPassword } = req.body;
+        console.log(req.body);
+        if (!username) {
+            console.log("Enter username");
+            return res.status(400).json({ success: false, message: "Enter username" });
+        }
+        if (!currentPassword) {
+            console.log("Enter currentPassword");
+            return res.status(400).json({ success: false, message: "Enter current password" });
+        }
+        if (!newPassword) {
+            console.log("Enter newPassword");
+            return res.status(400).json({ success: false, message: "Enter new password" });
+        }
+        if (!confirmNewPassword) {
+            console.log("Enter confirmNewPassword");
+            return res.status(400).json({ success: false, message: "Enter confirm new password" });
+        }
+        if (newPassword !== confirmNewPassword) {
+            console.log("New password is not same");
+            return res.status(400).json({ success: false, message: "New password is not same" });
+        }
+        const user = await User.findOne({ username });
+        if (!user) {
+            console.log("User does not exist");
+            return res.status(400).json({ success: false, message: "User does not exist" });
+        }
+        const isMatch = await comparePasswords(currentPassword, user.password);
+        if (!isMatch) {
+            console.log("Current password is incorrect");
+            return res.status(400).json({ success: false, message: "Current password is incorrect" });
+        }
+        console.log(user);
+        const newHashedPassword = await hashPassword(newPassword);
+        user.password = newHashedPassword;
+        await user.save();
+        console.log("Changed password successfully");
+        return res.json({ success: true, message: "Changed password successfully" });
+    } catch (error) {
+        console.log("Some error has occured");
+        return res.status(500).json({ success: false, message: "Some error has occured" });
+    }
+};
 
 // search function
 

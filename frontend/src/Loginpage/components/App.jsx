@@ -9,6 +9,7 @@ import Logo_main from '../../Homepage/components_Homepage/Logo_main';
 import ForgotPassword from './Forgot_password';
 import Dashboard from './dashboard';
 import ProtectedRoute from './protectedroute';
+import Change_password from './Change_password';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/edit-profile" element={<Change_password />} />
         <Route path="/home" element={
           <ProtectedRoute>
             <Home />

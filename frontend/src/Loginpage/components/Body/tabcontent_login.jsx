@@ -6,6 +6,7 @@ import Button from "./button";
 import Tabhead from "./tabhead";
 import cardcontent_login from "./cardcontent_login";
 import { motion, AnimatePresence } from "framer-motion";
+import Button_login from "./Button_login";
 
 function Tabscontent_login() {
     const [email, setEmail] = useState('');
@@ -85,12 +86,12 @@ function Tabscontent_login() {
                             />
                             <span
                                 onClick={() => setShowPassword(!showPassword)}
-                                style={{ 
-                                    position: "absolute", 
-                                    right: "10px", 
-                                    top: "50%", 
-                                    transform: "translateY(-50%)", 
-                                    cursor: "pointer", 
+                                style={{
+                                    position: "absolute",
+                                    right: "10px",
+                                    top: "50%",
+                                    transform: "translateY(-50%)",
+                                    cursor: "pointer",
                                     color: "white"
                                 }}
                             >
@@ -99,7 +100,7 @@ function Tabscontent_login() {
                         </div>
                     </div>
 
-                    <Button />
+                    <Button_login />
 
                     <div style={{ position: "relative" }}>
                         <AnimatePresence mode="wait">
@@ -111,13 +112,13 @@ function Tabscontent_login() {
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     transition={{ duration: 0 }}
                                     className="login_message login_message-error"
-                                    style={{ 
-                                        position: "absolute", 
-                                        top: "-18px", 
-                                        left: "0", 
-                                        right: "0", 
+                                    style={{
+                                        position: "absolute",
+                                        top: "-18px",
+                                        left: "0",
+                                        right: "0",
                                         textAlign: "center",
-                                        pointerEvents: "none" 
+                                        pointerEvents: "none"
                                     }}
                                 >
                                     {error}
@@ -125,15 +126,15 @@ function Tabscontent_login() {
                             )}
                         </AnimatePresence>
                         {success && (
-                            <div 
-                                className="login_message login_message-success" 
-                                style={{ 
-                                    position: "absolute", 
-                                    top: "-18px", 
-                                    left: "0", 
-                                    right: "0", 
+                            <div
+                                className="login_message login_message-success"
+                                style={{
+                                    position: "absolute",
+                                    top: "-18px",
+                                    left: "0",
+                                    right: "0",
                                     textAlign: "center",
-                                    pointerEvents: "none" 
+                                    pointerEvents: "none"
                                 }}
                             >
                                 {success}
@@ -145,7 +146,7 @@ function Tabscontent_login() {
                         <div
                             className="noaccount_login-1"
                             onClick={() => {
-                                setError(''); 
+                                setError('');
                                 navigate("/signin");
                             }}
                             style={{ cursor: "pointer", color: "white", textDecoration: "underline" }}
