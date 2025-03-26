@@ -4,7 +4,7 @@ import User from '../models/User.js';
 
 // Send OTP
 export const sendOTP = async (req, res) => {
-    const { email } = req.body;
+    const { email, isForgotPassword } = req.body;
 
     if (!email) {
         console.log(`OTP sent successfully0 to ${email}`);
@@ -14,7 +14,7 @@ export const sendOTP = async (req, res) => {
     try {
         const user = await User.findOne({ email });
 
-        if (user && user.verified) {
+        if (!isForgotPassword && user && user.verified) {
             console.log(`OTP sent successfully1 to ${email}`);
 
             return res.status(400).json({ success: false, message: 'User is already verified.' });

@@ -37,7 +37,10 @@ function Tabscontent() {
 
         try {
             console.log("Sending OTP request to backend...");
-            const response = await axios.post('http://localhost:5000/api/otp/send-otp', { email });
+            const response = await axios.post('http://localhost:5000/api/otp/send-otp', {
+                email,
+                isForgotPassword: false
+            });
             console.log("Response from backend:", response.data);
             if (response.data.success) {
                 setShowOtpInput(true);
@@ -208,6 +211,14 @@ function Tabscontent() {
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     transition={{ duration: 0 }}
                                     className="login_message login_message-error"
+                                    style={{
+                                        position: "absolute",
+                                        top: "-18px",
+                                        left: "0",
+                                        right: "0",
+                                        textAlign: "center",
+                                        pointerEvents: "none"
+                                    }}
                                 >
                                     {error}
                                 </motion.div>
@@ -223,6 +234,14 @@ function Tabscontent() {
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     transition={{ duration: 0 }}
                                     className="login_message login_message-success"
+                                    style={{
+                                        position: "absolute",
+                                        top: "-18px",
+                                        left: "0",
+                                        right: "0",
+                                        textAlign: "center",
+                                        pointerEvents: "none"
+                                    }}
                                 >
                                     {success}
                                 </motion.div>

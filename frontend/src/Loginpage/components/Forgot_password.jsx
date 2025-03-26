@@ -20,7 +20,10 @@ function ForgotPassword() {
         setSuccess('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/otp/send-otp', { email });
+            const response = await axios.post('http://localhost:5000/api/otp/send-otp', {
+                email,
+                isForgotPassword: true
+            });
             if (response.data.success) {
                 setSuccess('OTP sent to your email.');
                 setShowOtpInput(true);
@@ -102,8 +105,9 @@ function ForgotPassword() {
                                 className="login_message login_message-error forgotpassword-message"
                                 style={{
                                     position: "fixed",
-                                    bottom: "120px",
-                                    left: "46.5%",
+                                    bottom: "7.5%",
+                                    left: "40%",
+                                    right: "40%",
                                     transform: "translateX(-50%)",
                                     zIndex: 2
                                 }}                            >
@@ -114,8 +118,9 @@ function ForgotPassword() {
                     {success && (
                         <div className="login_message login_message-success forgotpassword-message" style={{
                             position: "fixed",
-                            bottom: "120px",
-                            left: "45%",
+                            bottom: "7.5%",
+                            left: "40%",
+                            right: "40%",
                             transform: "translateX(-50%)",
                             zIndex: 2
                         }}>

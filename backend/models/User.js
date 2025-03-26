@@ -1,13 +1,19 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-    username: { type: String, unique: true },
+    username: {
+        type: String,
+        unique: true,
+        sparse: true,
+    },
     email: {
         type: String,
         unique: true,
         match: /^[a-zA-Z0-9._%+-]+@iitk\.ac\.in$/  // Enforces email format
     },
-    password: { type: String },
+    password: {
+        type: String,
+    },
     otp: String,
     otpExpiry: Date,
     verified: { type: Boolean, default: false }
