@@ -28,12 +28,15 @@ function Tabscontent_changepassword() {
         e.preventDefault();
         setSuccess('');
         try {
+            const token = localStorage.getItem("token") || localStorage.getItem("adminToken");
             console.log("Changing password...");
             const changePasswordResponse = await axios.post('http://localhost:5000/api/user/change-password', {
                 username,
                 currentPassword: password,
                 newPassword,
                 confirmNewPassword
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
             });
             console.log("Changed password...");
             if (changePasswordResponse.data.success) {

@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
     verified: { type: Boolean, default: false }
 });
 
-// Ensure emails are stored in lowercase to avoid case-sensitive issues
 userSchema.pre('save', function (next) {
     this.email = this.email.toLowerCase();
     next();

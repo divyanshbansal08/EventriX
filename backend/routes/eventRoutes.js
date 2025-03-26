@@ -1,15 +1,15 @@
 import express from 'express';
 import { makeEvent, registerEvent } from '../controllers/eventController.js';
+import { verifyToken } from '../middlewares/authMiddleware.js'; // Import middleware
 
 const router = express.Router();
 
-
-// Make event
+// Create Event
 router.post('/make-event', makeEvent);
 
-// Register event
-router.post('/register-event', registerEvent);
-
+// Register Event (Protected Route)
+router.post('/register-event', verifyToken, registerEvent);
 
 export default router;
+
 

@@ -103,7 +103,7 @@ function Right_Logo({ onLogout, onLogin, isLoggedIn }) {
                     </AnimatePresence>
                 </div>
             ) : (
-                <button onClick={onLogin} className="login-button">
+                <button onClick={onLogin} className="logo_main_button logo_main_max-width-full logo_main_button-1 hover-button-0">
                     Login
                 </button>
             )}

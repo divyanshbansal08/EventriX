@@ -11,6 +11,7 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@iitk\.ac\.in$/;
 export const logIN = async (req, res) => {
     try {
         const { email, password } = req.body;
+
         console.log("Received data:", req.body);
         if (!email) {
             return res.status(400).json({ message: "Enter email." });
@@ -18,12 +19,10 @@ export const logIN = async (req, res) => {
         if (!password) {
             return res.status(400).json({ message: "Enter password." });
         }
-        // Validate email domain
         if (!emailRegex.test(email)) {
             return res.status(400).json({ success: false, message: "Only @iitk.ac.in emails are allowed" });
         }
 
-        // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ success: false, message: "User does not exist" });
@@ -32,10 +31,8 @@ export const logIN = async (req, res) => {
         if (!user.verified) {
             return res.status(400).json({ message: "Please verify your email before logging in." });
         }
-        // Compare hashed password
         const isPasswordValid = await comparePasswords(password, user.password);
         if (isPasswordValid) {
-            // Generate JWT token
             const token = jwt.sign({ email: user.email, username: user.username }, jwtSecret, { expiresIn: '1h' });
             res.json({ success: true, token, message: "Login successful" });
         } else {
@@ -66,7 +63,6 @@ export const signIN = async (req, res) => {
             return res.status(400).json({ success: false, message: "Enter password." });
         }
 
-        // Validate email domain
         if (!emailRegex.test(email)) {
             console.log("Only @iitk.ac.in emails are allowed.");
             return res.status(400).json({ success: false, message: "Only @iitk.ac.in emails are allowed" });

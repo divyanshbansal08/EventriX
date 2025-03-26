@@ -14,13 +14,11 @@ function Home() {
     const [success, setSuccess] = useState('');
     const [messageKey, setMessageKey] = useState(0);
 
-    // On mount, check if a token exists.
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
     }, []);
 
-    // Set the logout success message only once if we navigated with loggedOut state.
     useEffect(() => {
         if (location.state && location.state.loggedOut && !success) {
             setSuccess("Logged out successfully");
@@ -28,19 +26,16 @@ function Home() {
         }
     }, [location, success]);
 
-    // Handle logout: remove token and trigger fade-out animation.
     const handleLogout = () => {
         localStorage.removeItem("token");
         setIsLoggedIn(false);
         setIsExiting(true);
     };
 
-    // Navigate to login page.
     const handleLogin = () => {
         navigate("/login");
     };
 
-    // Define animation properties.
     const animationProps =
         location.state && location.state.loggedOut
             ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.5 } }
@@ -48,7 +43,6 @@ function Home() {
 
     return (
         <div className="homepage_main-div-0">
-            {/* Background Image */}
             <div
                 className="background-image-main"
                 style={{
@@ -64,10 +58,8 @@ function Home() {
                 }}
             />
 
-            {/* Logo_main receives onLogout, onLogin, and isLoggedIn status */}
             <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
 
-            {/* Animated Main Content */}
             <motion.div
                 {...animationProps}
                 onAnimationComplete={() => {
@@ -79,7 +71,6 @@ function Home() {
                 <Body />
             </motion.div>
 
-            {/* Success Message at the Bottom */}
             <div
                 style={{
                     position: "fixed",

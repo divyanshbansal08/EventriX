@@ -1,4 +1,4 @@
-
+import Admin from "../models/Admin.js";
 import User from "../models/User.js";
 import { comparePasswords, hashPassword } from "../services/userService.js";
 
@@ -49,20 +49,30 @@ export const changePassword = async (req, res) => {
             console.log("New password is not same");
             return res.status(400).json({ success: false, message: "New password is not same" });
         }
-        const user = await User.findOne({ username });
+        let user = await User.findOne({ username });
+        let isAdmin = false;
+
         if (!user) {
-            console.log("User does not exist");
-            return res.status(400).json({ success: false, message: "User does not exist" });
+            user = await Admin.findOne({ username });
+            isAdmin = true;
         }
+
+        if (!user) {
+            console.log("User not found.");
+            return res.status(404).json({ success: false, message: 'User not found.' });
+        }
+
         const isMatch = await comparePasswords(currentPassword, user.password);
         if (!isMatch) {
             console.log("Current password is incorrect");
             return res.status(400).json({ success: false, message: "Current password is incorrect" });
         }
+
         console.log(user);
         const newHashedPassword = await hashPassword(newPassword);
         user.password = newHashedPassword;
         await user.save();
+
         console.log("Changed password successfully");
         return res.json({ success: true, message: "Changed password successfully" });
     } catch (error) {
