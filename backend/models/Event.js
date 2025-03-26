@@ -9,7 +9,8 @@ const eventSchema = new mongoose.Schema({
 
     registeredUsers: [{
         email: { type: String, required: true },
-        registeredAt: { type: Date, default: Date.now }
+        registeredAt: { type: Date, default: Date.now },
+        regustered: { type: Boolean }
     }]
 });
 

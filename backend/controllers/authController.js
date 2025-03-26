@@ -24,10 +24,8 @@ export const logIN = async (req, res) => {
         }
 
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ success: false, message: "User does not exist" });
-        }
-        console.log(user);
+        if (!user) return res.status(400).json({ success: false, message: "User does not exist" });
+
         if (!user.verified) {
             return res.status(400).json({ message: "Please verify your email before logging in." });
         }
@@ -64,11 +62,10 @@ export const signIN = async (req, res) => {
         }
 
         if (!emailRegex.test(email)) {
-            console.log("Only @iitk.ac.in emails are allowed.");
             return res.status(400).json({ success: false, message: "Only @iitk.ac.in emails are allowed" });
         }
-        const user = await User.findOne({ email });
 
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ success: false, message: "User not found. Please verify OTP first." });
         }

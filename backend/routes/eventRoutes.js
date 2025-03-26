@@ -7,9 +7,7 @@ const router = express.Router();
 // Create Event
 router.post('/make-event', makeEvent);
 
-// Register Event (Protected Route)
+// Register Event (Protected Route, No Event ID Needed)
 router.post('/register-event', verifyToken, registerEvent);
 
 export default router;
-
-
