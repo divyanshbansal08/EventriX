@@ -5,7 +5,6 @@ import Tabscontent_changepassword from "./Body/Tabscontent_changepassword";
 function Body_changepassword() {
     return (<div className="signup_align-center">
         <div className="signup_tabs">
-            <Tabs />
             <Tabscontent_changepassword />
         </div>
     </div>);

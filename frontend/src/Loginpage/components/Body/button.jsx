@@ -5,7 +5,6 @@ function Button() {
     return (<div className="signup_form-button-wrapper">
         <Subbutton
             value="Signin" />
-        <Subbutton1 value="Sign up with Google" />
     </div>);
 }
 export default Button;

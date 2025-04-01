@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+.council-section {
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.council-section h1 {
+    margin-bottom: 30px;
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+.council {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: black;
+    padding: 15px 40px;
+    margin: 10px auto;
+    margin-bottom: 40px;
+    width: 80%;
+    min-height: 300px;
+    border-radius: 24px;
+}
+
+.council-desc {
+    text-align: left;
+    margin-top: -15px;
+    margin-left: 30px;
+    width: 50%;
+}
+
+.council-name {
+    font-size: 34px;
+    margin-bottom: -10px;
+}
+
+.council-keyword {
+    font-size: 34px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.council-text {
+    font-size: 16px;
+}
+
+
+.council img {
+    width: 30%;
+    height: 220px;
+    border-radius: 8px;
+    margin-right: 40px;
+}
+
+.council-btn {
+    background: #1a1a1a;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 20px;
+    transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+}
+
+.council-btn:hover {
+    background: white;
+    color: black;
+    border-color: black;
+    transform: scale(1.1);
+    font-weight: bold;
+}

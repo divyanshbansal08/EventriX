@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Rahaman146/Testproject/issues"
   },
-  "homepage": "https://github.com/Rahaman146/Testproject#readme"
+  "homepage": "https://github.com/Rahaman146/Testproject#readme",
+  "dependencies": {
+    "@craco/craco": "^7.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  }
 }

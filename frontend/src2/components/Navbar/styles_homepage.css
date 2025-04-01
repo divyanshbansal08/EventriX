@@ -1,0 +1,407 @@
+img {
+    display: inline-block;
+    width: auto;
+    height: 38px;
+}
+
+.imgLogo{
+    height: 40px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.home-div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.homepage_main-div-0 {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.homepage_logo-div-01 {
+    color: white;
+    width: 100%;
+    height: 54px;
+}
+
+.homepage_logo-div-1 {
+    width: 1440px;
+
+}
+
+.homepage_logo-div-11 {
+    width: 100%;
+    height: 100%;
+}
+
+.homepage_logo-div-2 {
+    display: flex;
+    height: 100%;
+    padding-right: 5%;
+    padding-left: 5%;
+    align-items: center;
+    border-bottom-style: solid;
+    border-bottom-width: 0px;
+}
+
+.homepage_logo-div-3 {
+    display: grid;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: space-between;
+    justify-items: stretch;
+    align-items: center;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+.homepage_left-logo-div-0 {
+    position: static;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.homepage_tiles {
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+}
+
+.homepage_middle-logo-0 {
+    position: relative;
+    float: left;
+    flex-shrink: 0;
+    text-align: center;
+    text-decoration: none;
+    color: #333333;
+}
+
+.homepage_middle-logo-wrapper {
+    height: 38px;
+    display: flex;
+    justify-content: center;
+}
+
+.homepage_middle-logo-wrapper-1 {
+    background: currentcolor;
+    mask-position: center;
+    mask-size: cover;
+    mask-mode: alpha;
+    width: fit-content;
+    height: 100%;
+}
+
+.homepage_right-logo-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.homepage_right-logo-div-0 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 0;
+}
+
+.homepage_button-0 {
+    display: flex;
+    padding-top: 0.75rem;
+    padding-right: 1.5rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    grid-column-gap: 0.5rem;
+    grid-row-gap: 0.5rem;
+    box-shadow: inset 0 -2px 1px 0 hsla(0, 0.00%, 0.00%, 0.20), inset 0 32px 24px 0 hsla(0, 0.00%, 100.00%, 0.05), inset 0 1px 1px 1px hsla(0, 0.00%, 100.00%, 0.25), inset 0 0 0 1px color-mix(in srgb, #08080D, transparent 85%), 0 1px 2px 0 color-mix(in srgb, #08080D, transparent 95%);
+    transition-property: transform, box-shadow, background-color;
+    transition-duration: 200ms, 200ms, 200ms;
+    transition-timing-function: ease, ease, ease;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    border-radius: 100px;
+    max-width: 100px;
+    margin-left: 5%;
+}
+
+.homepage_button-1 {
+    color: black;
+    background-color: white;
+}
+
+
+.homepage_body-0 {
+    padding-right: 5%;
+    padding-left: 5%;
+    height: 90vh;
+}
+
+.homepage_body-1 {
+    width: 100%;
+    max-width: 80rem;
+    margin-right: auto;
+    margin-left: auto;
+    height: 100%;
+}
+
+.homepage_body-2 {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    max-height: 60rem;
+    min-height: calc(100* var(--vh));
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.homepage_body-3 {
+    padding-top: 7rem;
+    height: 100%;
+}
+
+.homepage_body-4 {
+    text-align: center;
+    height: 100%;
+}
+
+.homepage_body-5 {
+    width: 100%;
+    max-width: 48rem;
+    height: 100%;
+}
+
+.homepage_body-header-h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.homepage_body-header h1 {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+.homepage_body-middle-0 {
+    margin-bottom: 150px;
+}
+
+.homepage_body-middle {
+    font-size: 1.125rem;
+    margin-bottom: 0rem;
+}
+
+.homepage_body-lower-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.homepage_body-lower {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    align-items: stretch;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    height: 40px;
+    order: -1;
+}
+
+.homepage_body-lower-input.homepage_body-lower-input-1 {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    background-color: color-mix(in srgb, #FFFFFF, transparent 90%);
+    color: white;
+}
+
+.homepage_body-lower-input {
+    height: auto;
+    min-height: 2.75rem;
+    margin-bottom: 0px;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: transparent;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: transparent;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: transparent;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: color-mix(in srgb, #08080D, transparent 95%);
+    backdrop-filter: blur(10px);
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
+    color: #08080D;
+    font-size: 1rem;
+    line-height: 1.6;
+    border-radius: 12px;
+}
+
+.homepage_body-lower-button {
+    border-top-color: white;
+    border-right-color: white;
+    border-bottom-color: white;
+    border-left-color: white;
+    background-color: white;
+    color: black;
+}
+
+.homepage_body-lower-button-1 {
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: black;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: black;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: black;
+    background-color: black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 100px;
+}
+
+.homepage_hover-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: black;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.homepage_hover-button:hover {
+    background-color: #bcb5b5;
+    transform: scale(1.1);
+}
+
+/* additional css */
+
+
+input {
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+    appearance: auto;
+    cursor: text;
+}
+
+.homepage_main-div-0 {
+    position: relative;
+    min-height: 100vh;
+}
+
+.background-image-0 {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: hsla(208, 0%, 0%, 0.5);
+    position: relative;
+}
+
+.background-image-1 {
+    position: relative;
+    z-index: 2;
+}
+
+.background-image-main {
+    width: 100%;
+    height: 100vh;
+    filter: brightness(0.7);
+}
+
+body,
+html,
+#root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+.homepage_main-div-0 {
+    position: relative;
+    z-index: 1;
+}
+
+.logo_main_max-width-full {
+    max-width: none;
+}
+
+.logo_main_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column-gap: 0.5rem;
+    grid-row-gap: 0.5rem;
+    background-color: white;
+    box-shadow: inset 0 -2px 1px 0 hsla(0, 0.00%, 0.00%, 0.20), inset 0 32px 24px 0 hsla(0, 0.00%, 100.00%, 0.05), inset 0 1px 1px 1px hsla(0, 0.00%, 100.00%, 0.25), inset 0 0 0 1px color-mix(in srgb, #08080D, transparent 85%), 0 1px 2px 0 color-mix(in srgb, #08080D, transparent 95%);
+    transition-property: transform, box-shadow, background-color;
+    transition-duration: 200ms, 200ms, 200ms;
+    transition-timing-function: ease, ease, ease;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    border-radius: 100px;
+}
+
+.logo_main_button-1 {
+    background-color: white;
+    color: #08080D;
+}

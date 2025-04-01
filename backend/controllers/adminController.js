@@ -22,7 +22,7 @@ export const loginAdmin = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { email: admin.email, isAdmin: true },
+            { email: admin.email, clubID: admin.clubID, clubName: admin.clubName, isAdmin: true },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );

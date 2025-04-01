@@ -15,7 +15,8 @@ const addAdmin = async () => {
 
         const adminData = {
             username: "DanceClubCody",
-            clubID: "danceclub",
+            clubID: "2",
+            clubName: "danceclub",
             email: "danceclub@iitk.ac.in",
             password: "password_dance",
         };

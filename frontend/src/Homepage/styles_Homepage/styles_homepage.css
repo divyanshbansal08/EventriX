@@ -1,7 +1,8 @@
+@import "tailwindcss";
+
 img {
     display: inline-block;
     max-width: 100%;
-    height: 38px;
 }
 
 a {
@@ -102,6 +103,10 @@ a {
     mask-mode: alpha;
     width: fit-content;
     height: 100%;
+}
+
+.homepage_middle-logo-1 {
+    height: 38px;
 }
 
 .homepage_right-logo-wrapper {

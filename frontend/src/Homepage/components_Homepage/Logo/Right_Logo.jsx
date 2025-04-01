@@ -22,11 +22,14 @@ function Right_Logo({ onLogout, onLogin, isLoggedIn }) {
     }, [dropdownRef]);
 
     // Handle Edit Profile.
-    const handleEditProfile = () => {
-        navigate("/edit-profile");
+    const handleChangePassword = () => {
+        navigate("/change-password");
         setDropdownOpen(false);
     };
-
+    const handleFavourites = () => {
+        navigate("/favourites");
+        setDropdownOpen(false);
+    };
     return (
         <div className="homepage_right-logo-wrapper" style={{ position: "relative" }}>
             {isLoggedIn ? (
@@ -37,8 +40,8 @@ function Right_Logo({ onLogout, onLogin, isLoggedIn }) {
                         style={{ cursor: "pointer" }}
                     >
                         <svg
-                            width="40"
-                            height="40"
+                            width="35"
+                            height="35"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +74,7 @@ function Right_Logo({ onLogout, onLogin, isLoggedIn }) {
                                 }}
                             >
                                 <div
-                                    onClick={handleEditProfile}
+                                    onClick={handleChangePassword}
                                     style={{
                                         padding: "12px 20px",
                                         cursor: "pointer",
@@ -81,7 +84,20 @@ function Right_Logo({ onLogout, onLogin, isLoggedIn }) {
                                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f7f7f7"}
                                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                                 >
-                                    Edit Profile
+                                    Change Password
+                                </div>
+                                <div
+                                    onClick={handleFavourites}
+                                    style={{
+                                        padding: "12px 20px",
+                                        cursor: "pointer",
+                                        transition: "background-color 0.2s",
+                                        borderBottom: "1px solid #eaeaea"
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f7f7f7"}
+                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+                                >
+                                    Favourites
                                 </div>
                                 <div
                                     onClick={() => {
