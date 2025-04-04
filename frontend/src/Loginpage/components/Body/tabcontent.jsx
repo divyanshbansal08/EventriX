@@ -16,7 +16,7 @@ function Tabscontent() {
     const [success, setSuccess] = useState('');
     const [messageKey, setMessageKey] = useState(0);
     const [showOtpInput, setShowOtpInput] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(true);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
 

@@ -229,7 +229,6 @@ a {
     align-items: stretch;
     grid-column-gap: 16px;
     grid-row-gap: 16px;
-    height: 40px;
     order: -1;
 }
 
@@ -304,6 +303,7 @@ a {
     text-align: center;
     text-decoration: none;
     border-radius: 100px;
+    font-weight: 500;
 }
 
 .homepage_hover-button {

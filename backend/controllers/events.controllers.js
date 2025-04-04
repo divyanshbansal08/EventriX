@@ -7,48 +7,61 @@ import { ApiResponse } from '../utils/ApiResponse.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import { deleteFromCloudinary } from '../utils/cloudinary.js';
 import jwt from "jsonwebtoken";
+import moment from "moment";
+
 
 export const getEvent = async (req, res) => {
     try {
-        const councilName = req.params.councilName;
-        if (councilName) {
-            console.log(councilName);
-            const events = await Event.find({ councilName: councilName });
-            if (events.length > 0) {
-                return res.status(200).json(new ApiResponse(200, "Events fetched successfully.", events));
-            } else {
-                return res.status(404).json(new ApiResponse(404, "No events found for this council."));
+        const now = moment().utc(); // Get the current UTC time
+
+        let filter = {};
+
+        if (req.params.councilName) {
+            filter.councilName = req.params.councilName;
+        } else if (req.params.clubID) {
+            filter.clubID = req.params.clubID;
+        } else if (req.params.id) {
+            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+                return res.status(404).send(`No event with id: ${req.params.id}`);
             }
-        }
-        const clubID = req.params.clubID;
-        if (clubID) {
-            console.log(clubID);
-            const events = await Event.find({ clubID: clubID });
-            if (events.length > 0) {
-                return res.status(200).json(new ApiResponse(200, "Events fetched successfully.", events));
-            } else {
-                return res.status(404).json(new ApiResponse(404, "No events found for this club."));
-            }
-        }
-        const { id } = req.params;
-        if (id) {
-            if (!mongoose.Types.ObjectId.isValid(id)) {
-                if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No event with id: ${id}`);
-            }
-            const event = await Event.findById(id);
-            if (event) {
-                return res.status(200).json(new ApiResponse(200, "Event fetched successfully.", event));
-            } else {
+            const event = await Event.findById(req.params.id);
+            if (!event) {
                 return res.status(404).json(new ApiResponse(404, "No such event found."));
             }
-        } else {
-            const events = await Event.find({});
+            return res.status(200).json(new ApiResponse(200, "Event fetched successfully.", event));
+        }
+
+        // Filter out past events
+        filter.$expr = {
+            $gt: [
+                {
+                    $dateFromString: {
+                        dateString: {
+                            $concat: [
+                                { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+                                "T",
+                                "$time",
+                                ":00.000Z"
+                            ],
+                        },
+                    },
+                },
+                now.toDate(),
+            ],
+        };
+
+        const events = await Event.find(filter);
+
+        if (events.length > 0) {
             return res.status(200).json(new ApiResponse(200, "Events fetched successfully.", events));
+        } else {
+            return res.status(404).json(new ApiResponse(404, "No upcoming events found."));
         }
     } catch (error) {
         return res.status(500).json(new ApiResponse(500, "Something went wrong while fetching events."));
     }
-}
+};
+
 
 
 export const createEvent = async (req, res) => {

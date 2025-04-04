@@ -71,8 +71,8 @@ input {
   display: flex;
   overflow: auto;
   min-height: calc(100* var(--vh));
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 15rem;
+  padding-bottom: 10rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
