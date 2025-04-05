@@ -388,7 +388,8 @@ p {
   position: relative;
   display: grid;
   overflow: auto;
-  min-height: calc(100* var(--vh));
+  min-height: calc(100 * var(--vh));
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
@@ -397,7 +398,6 @@ p {
   grid-row-gap: 0rem;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  height: 100vh;
   background-color: #202025;
   color: white;
 }
@@ -442,16 +442,12 @@ p {
 }
 
 .login_footer {
-  position: absolute;
-  left: 0%;
-  top: 100%;
-  right: 0%;
-  bottom: 0%;
-  display: flex;
-  width: 100%;
+  position: relative;
   height: 4.5rem;
   padding-right: 5%;
   padding-left: 5%;
+  display: flex;
+  width: 100%;
   justify-content: flex-start;
   align-items: center;
 }
@@ -690,4 +686,13 @@ p {
   border-color: black;
   transform: scale(1.1);
   font-weight: bold;
+}
+
+.login-left {
+  padding: 2rem;
+}
+
+.login-right {
+  width: 100%;
+  height: 100%;
 }

@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo_main from "./Logo_main";
 import Body from "./Body";
-import SpiderManImage from "../Assets_Homepage/marvels-spider-man--11990.jpeg";
+import BackgroundImage from "../Assets_Homepage/main_background.png";
+
 
 function Home() {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ function Home() {
             <div
                 className="background-image-main"
                 style={{
-                    backgroundImage: `url(${SpiderManImage})`,
+                    backgroundImage: `url(${BackgroundImage})`,
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
                     position: "fixed",
