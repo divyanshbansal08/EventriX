@@ -5,7 +5,9 @@ import councilClubsData from "../data/councilClubs.js"; // Adjust the import pat
 import { getEventsByClub } from "../api/events.js"; // Adjust the import path as necessary
 import { useEffect, useState } from "react";
 import "tailwindcss";
-
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ClubDetails = () => {
   const { id } = useParams();
@@ -15,10 +17,14 @@ const ClubDetails = () => {
   console.log(club, council);
 
 
+
   // get events  from backend
   const [events, setEvents] = useState([]);
   const [lastIndex, setLastIndex] = useState(3); // State to track the last index of events
   const [buttonText, setButtonText] = useState("View all"); // State to track button text
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [messageKey, setMessageKey] = useState(0);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -34,10 +40,55 @@ const ClubDetails = () => {
     fetchEvents();
   } // Call the fetch function on component mount
     , [club]); // Dependency array to re-fetch if club ID changes
+  useEffect(() => {
+    if (!club) {
+      const storedClub = sessionStorage.getItem(`club-${id}`);
+      if (storedClub) {
+        setClub(JSON.parse(storedClub));
+      }
+    } else {
+      sessionStorage.setItem(`club-${id}`, JSON.stringify(club));
+    }
+  }, [club]);
 
   if (!club) {
     return <h1 className="text-white text-center mt-10">club Not Found</h1>;
   }
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    setSuccess('');
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please log in first.");
+      return;
+    }
+
+    try {
+      console.log("Sending request to backend...");
+      const response = await axios.post('http://localhost:5000/api/user/fav',
+        { clubID: club.id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("Response from backend:", response.data);
+
+      if (response.data.success) {
+        setSuccess(response.data.message);
+        setError('');
+      } else {
+        setError(response.data.message);
+        setMessageKey(prevKey => prevKey + 1);
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('An error occurred. Please try again.');
+      }
+      setMessageKey(prevKey => prevKey + 1);
+      setSuccess('');
+    }
+  };
 
   return (
     <div className="bg-black text-white font-poppins">
@@ -52,9 +103,48 @@ const ClubDetails = () => {
       {/* club Info Section */}
       <div className="flex flex-col md:flex-row justify-between mx-auto w-11/12 md:w-4/5">
         <div className="md:w-1/2 text-3xl font-semibold">
+          <div style={{ position: "relative" }}>
+            <AnimatePresence mode="wait">
+              {error && (
+                <motion.div
+                  key={messageKey}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0 }}
+                  className="login_message login_message-error"
+                  style={{
+                    position: "absolute",
+                    left: "30%",
+                    top: "75px",
+                    textAlign: "center",
+                    pointerEvents: "none"
+                  }}
+                >
+                  {error}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {success && (
+              <div
+                className="login_message login_message-success"
+                style={{
+                  position: "absolute",
+                  left: "30%",
+                  top: "75px",
+                  textAlign: "center",
+                  pointerEvents: "none"
+                }}
+              >
+                {success}
+              </div>
+            )}
+          </div>
           <p>{club.name},</p>
           <p>IIT Kanpur</p>
-          <button className="bg-white rounded-2xl mt-6 text-black px-4 py-2 text-sm">SUBSCRIBE</button>
+          <button className="bg-white rounded-2xl mt-6 text-black px-4 py-2 text-sm transition-transform hover:scale-110 border border-transparent hover:border-black"
+            onClick={handleSubscribe}
+          >SUBSCRIBE</button>
         </div>
 
         <div className="md:w-1/2 mt-4 text-base">
@@ -119,6 +209,7 @@ const ClubDetails = () => {
 
       {/* Bottom Spacing */}
       <div className="h-16"></div>
+
     </div>
   );
 };

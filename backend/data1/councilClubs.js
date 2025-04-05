@@ -32,22 +32,22 @@ const councilClubsData = [
         name: "Book Club",
         shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium elit ligula, ut dapibus dui aliquam eget. Nam ut libero at magna accumsan tempus vitae nec mauris. Duis a felis scelerisque lectus vulputate commodo.",
         longDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium elit ligula, ut dapibus dui aliquam eget. Nam ut libero at magna accumsan tempus vitae nec mauris. Duis a felis scelerisque lectus vulputate commodo. Sed dictum metus mauris, vel vehicula odio ullamcorper nec. Nullam ut felis velit. Fusce scelerisque elit lectus, vitae finibus arcu sagittis vel. Fusce hendrerit ultricies libero, eu semper libero volutpat eu.In a pellentesque urna, nec ultrices diam. In efficitur ligula id augue ornare, id congue sem posuere. Suspendisse eget efficitur lacus. Vivamus at convallis nibh. Cras pellentesque facilisis magna, at posuere lectus sodales ut. Nulla tincidunt quam enim, vel porta ex luctus sed. Nunc porttitor a tellus vel porta",
-        img: "/default.jpeg",
+        img: "../../default.jpeg",
         coordinators: [
           {
             name: "John Doe",
             email: "johndoe@iitk.ac.in",
-            img: "/defaultprofile.jpeg"
+            img: "../../defaultprofile.jpeg"
           },
           {
             name: "John Doe",
             email: "johndoe@iitk.ac.in",
-            img: "/defaultprofile.jpeg"
+            img: "../../defaultprofile.jpeg"
           },
           {
             name: "John Doe",
             email: "johndoe@iitk.ac.in",
-            img: "/defaultprofile.jpeg"
+            img: "../../defaultprofile.jpeg"
           }
         ],
         link: "/councils/clubs/mnc/2"

@@ -25,6 +25,8 @@ import EventDetails from "../../../src2/components/EventDetails";
 import EventUpdateForm from '../../../src2/components/EventUpdate';
 import ClubDetails from '../../../src2/components/ClubDetails';
 import { AllEvents } from '../../../src2/components/AllEvents.jsx';
+import Favourites from '../../../src2/components/Favourites.jsx';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -61,8 +63,6 @@ function App() {
             <AllEvents />
           } />
 
-          <Route path="/event/:id" element={<EventDetails />} />
-          <Route path="/councils" element={<CouncilList />} />
           <Route path="/create-event" element={<EventCreationForm />} />
           <Route path="/update-event" element={<EventUpdateForm />} />
           <Route path="/cells" element={<CellList />} />
@@ -72,6 +72,9 @@ function App() {
           <Route path="/fests/:tag" element={<FestDetails />} />
           <Route path="/councils/clubs/:tag" element={<CouncilClubs />} />
           <Route path="/councils/clubs/:tag/:id" element={<ClubDetails />} />
+          <Route path="/councils" element={<CouncilList />} />
+          <Route path="/event/:id" element={<EventDetails />} />
+          <Route path="/favourites" element={<Favourites />} />
         </Routes>
       </QueryClientProvider>
     </div>

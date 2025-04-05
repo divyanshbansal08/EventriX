@@ -27,6 +27,16 @@ const CouncilDetails = () => {
     fetchEvents();
   } // Call the fetch function on component mount
     , []);
+  useEffect(() => {
+    if (!council) {
+      const storedCouncil = sessionStorage.getItem(`council-${id}`);
+      if (storedCouncil) {
+        setClub(JSON.parse(storedCouncil));
+      }
+    } else {
+      sessionStorage.setItem(`council-${id}`, JSON.stringify(council));
+    }
+  }, [council]);
 
   if (!council) {
     return <h1 className="text-white text-center mt-10">Council Not Found</h1>;

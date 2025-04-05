@@ -21,10 +21,11 @@ function Lower() {
             console.log("Response from backend:", response.data);
 
             if (response.data.success) {
+                console.log(response.data.page);
                 setSuccess(response.data.message);
                 setError('');
                 setTimeout(() => {
-                    navigate("/" + response.data.page);
+                    navigate(response.data.page);
                 }, 2000);
             } else {
                 setError(response.data.message);

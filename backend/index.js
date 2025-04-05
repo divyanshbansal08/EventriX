@@ -20,10 +20,15 @@ import otpRoutes from './routes/otpRoutes.js';
 import protectedRoutes from './routes/protectedRoutes.js';
 import { verifyToken } from './middlewares/authMiddleware.js';
 import adminRoutes from "./routes/adminRoutes.js";
+import startNotify from './mailer.notify.js';
 
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('Connected to MongoDB'))
+    .then(() => {
+        console.log('Connected to MongoDB');
+        startNotify();
+    })
     .catch((error) => console.error('MongoDB connection failed:', error.message));
+
 
 app.use("/api/admin", adminRoutes);
 app.use('/api/auth', authRoutes);

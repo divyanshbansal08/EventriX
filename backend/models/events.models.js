@@ -48,16 +48,15 @@ const eventSchema = new mongoose.Schema({
         type: String,
         ref: "Admin"
     },
-    registeredUsers: {
-        user_id: {
-            type: [mongoose.Schema.Types.ObjectId],
-            ref: "User"
-        },
-        notified: {
-            type: Boolean,
-            default: false
-        }
-    }
+    registeredUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    notifiedUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }]
+
 }, { timestamp: true });
 
 const Event = mongoose.model("Event", eventSchema);

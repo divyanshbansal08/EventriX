@@ -1,6 +1,10 @@
 import Admin from "../models/Admin.js";
 import User from "../models/User.js";
 import { comparePasswords, hashPassword } from "../services/userService.js";
+import councilClubsData from "../data1/councilClubs.js";
+import Event from "../models/events.models.js";
+import moment from "moment";
+import jwt from "jsonwebtoken";
 
 // reset password
 
@@ -81,20 +85,198 @@ export const changePassword = async (req, res) => {
     }
 };
 
-// search function
-
 export const search = async (req, res) => {
     const { search } = req.body;
     console.log("Received data:", req.body);
 
-    if (!search) return res.status(400).json({ success: false, page: '', message: 'Enter a query.' });
-
-    const validSearchTerms = ['home', 'login', 'signin', 'councils'];
-
-    if (validSearchTerms.includes(search.toLowerCase())) {
-        res.json({ success: true, page: search.toLowerCase(), message: 'Search successful, redirecting...' });
+    if (!search) {
+        return res.status(400).json({ success: false, page: '', message: 'Enter a query.' });
     }
-    else {
-        res.status(400).json({ success: false, page: 'does not exist', message: 'Query does not exist.' });
+
+    let foundClub = null;
+    for (const council of councilClubsData) {
+        foundClub = council.clubs.find(club =>
+            club.name.toLowerCase() === search.toLowerCase()
+        );
+        if (foundClub) break;
+    }
+
+    if (foundClub) {
+        return res.json({
+            success: true,
+            page: foundClub.link,
+            message: 'Search successful, redirecting to club page...'
+        });
+    }
+
+    try {
+        const now = moment().utc();
+
+        let filter = {
+            eventName: search,
+            $expr: {
+                $gt: [
+                    {
+                        $dateFromString: {
+                            dateString: {
+                                $concat: [
+                                    { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+                                    "T",
+                                    "$time",
+                                    ":00.000Z"
+                                ],
+                            },
+                        },
+                    },
+                    now.toDate(),
+                ],
+            }
+        };
+
+        const events = await Event.find(filter);
+
+        if (events.length > 0) {
+            return res.json({
+                success: true,
+                page: `/event/${events[0]._id}`,
+                message: 'Search successful, redirecting to event page...'
+            });
+        }
+    } catch (error) {
+        console.error("Error searching for event:", error);
+        return res.status(500).json({ success: false, page: '', message: 'Something went wrong while searching.' });
+    }
+    return res.status(404).json({ success: false, page: '', message: 'Query does not exist.' });
+};
+
+export const favourites = async (req, res) => {
+    const { clubID } = req.body;
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Decoded Token:", decoded);
+
+        const { email } = decoded;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        if (user.clubs.includes(clubID)) {
+            return res.status(400).json({ success: false, message: "Already subscribed to this club" });
+        }
+
+        user.clubs.push(clubID);
+        await user.save();
+
+        return res.json({ success: true, message: "Subscribed successfully" });
+    } catch (error) {
+        console.error("Error in subscription:", error);
+        return res.status(500).json({ success: false, message: "Something went wrong" });
     }
 };
+
+export const fetch_favourites = async (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+        return res.status(401).json({ message: "Invalid token" });
+    }
+
+    const { email } = decoded;
+    const user = await User.findOne({ email });
+
+    if (!user || !user.clubs) {
+        console.log("User has no subscribed clubs");
+        return res.status(404).json({ message: "No subscribed clubs found" });
+    }
+
+    const clubIDs = user.clubs.map(c => c.toString());
+    console.log("User's subscribed club IDs:", clubIDs);
+
+    const now = moment().utc(+5.5);
+
+    let filter = {
+        clubID: { $in: clubIDs },
+        $expr: {
+            $gt: [
+                {
+                    $dateFromString: {
+                        dateString: {
+                            $concat: [
+                                { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+                                "T",
+                                "$time",
+                                ":00.000Z"
+                            ],
+                        },
+                    },
+                },
+                now.toDate(),
+            ],
+        }
+    };
+
+    const events = await Event.find(filter);
+
+    if (events.length === 0) {
+        return res.json({ success: true, message: "No upcoming events found for subscribed clubs", events: [] });
+    }
+
+    res.json({ success: true, events });
+};
+
+export const notifyEvent = async (req, res) => {
+    const { _id } = req.body;
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Decoded Token:", decoded);
+
+        const { email } = decoded;
+        const user = await User.findOne({ email });
+        const event = await Event.findOne({ _id });
+
+        if (!user) {
+            console.log("User not found");
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        if (event.registeredUsers.includes(user._id)) {
+            console.log("Already subscribed to this event");
+
+            return res.status(400).json({ success: false, message: "Already subscribed to this event" });
+        }
+
+        event.registeredUsers.push(user._id);
+        await event.save();
+        console.log("Notified successfully");
+        return res.json({ success: true, message: "Notified successfully" });
+    } catch (error) {
+        console.error("Error in Notification:", error);
+        return res.status(500).json({ success: false, message: "Something went wrong" });
+    }
+}

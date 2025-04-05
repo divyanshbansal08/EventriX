@@ -12,7 +12,7 @@ import moment from "moment";
 
 export const getEvent = async (req, res) => {
     try {
-        const now = moment().utc(); // Get the current UTC time
+        const now = moment().utc(+5.5);
 
         let filter = {};
 
@@ -260,9 +260,35 @@ export const updateEvent = async (req, res) => {
 export const getEventByName = async (req, res) => {
     try {
         const eventName = req.params.eventName;
+
+        const now = moment().utc(+5.5);
+
+        let filter = {};
+
+        filter.eventName = req.params.eventName;
+
+        filter.$expr = {
+            $gt: [
+                {
+                    $dateFromString: {
+                        dateString: {
+                            $concat: [
+                                { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+                                "T",
+                                "$time",
+                                ":00.000Z"
+                            ],
+                        },
+                    },
+                },
+                now.toDate(),
+            ],
+        };
+
+        const events = await Event.find(filter);
+
         if (eventName) {
             console.log(eventName);
-            const events = await Event.find({ eventName: eventName });
             if (events.length > 0) {
                 return res.status(200).json(new ApiResponse(200, "Events fetched successfully.", events));
             } else {

@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
     },
     otp: String,
     otpExpiry: Date,
-    verified: { type: Boolean, default: false }
+    verified: { type: Boolean, default: false },
+    clubs: [{
+        type: String,
+    }]
 });
 
 userSchema.pre('save', function (next) {

@@ -8,7 +8,12 @@ dotenv.config();
 // Login Admin
 export const loginAdmin = async (req, res) => {
     const { email, password } = req.body;
-
+    if (!email) {
+        return res.status(404).json({ success: false, message: 'Enter email' });
+    }
+    if (!password) {
+        return res.status(404).json({ success: false, message: 'Enter password' });
+    }
     try {
         const admin = await Admin.findOne({ email: email.toLowerCase() });
 

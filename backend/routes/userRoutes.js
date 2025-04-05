@@ -1,5 +1,5 @@
 import express from 'express';
-import { resetPassword, changePassword, search } from '../controllers/userController.js'
+import { resetPassword, changePassword, search, favourites, fetch_favourites, notifyEvent } from '../controllers/userController.js'
 
 const router = express.Router();
 
@@ -10,6 +10,12 @@ router.post('/reset-password', resetPassword);
 router.post('/change-password', changePassword)
 // search
 router.post('/search', search);
+// favourites
+router.post('/fav', favourites);
+// fetch-favourites
+router.get('/fetch-fav', fetch_favourites);
+// notify-event
+router.post('/notify-event', notifyEvent);
 
 export default router;
 
