@@ -24,6 +24,26 @@ function Tabscontent() {
     const handleSendOTP = async (e) => {
         e.preventDefault();
         setSuccess('');
+        if (!username) {
+            setError('Enter Username');
+            setMessageKey(prevKey => prevKey + 1);
+            return;
+        }
+        if (!email) {
+            setError('Enter Email');
+            setMessageKey(prevKey => prevKey + 1);
+            return;
+        }
+        if (!password) {
+            setError('Enter Password');
+            setMessageKey(prevKey => prevKey + 1);
+            return;
+        }
+        if (!confirmpassword) {
+            setError('Enter Confirm Password');
+            setMessageKey(prevKey => prevKey + 1);
+            return;
+        }
         if (password.length < 6) {
             setError('Password should be at least 6 characters long');
             setMessageKey(prevKey => prevKey + 1);
@@ -51,8 +71,13 @@ function Tabscontent() {
                 setMessageKey(prevKey => prevKey + 1);
             }
         } catch (error) {
-            setError('An error occurred. Please try again.');
+            if (error.response && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError('An error occurred. Please try again.');
+            }
             setMessageKey(prevKey => prevKey + 1);
+            setSuccess('');
         }
     };
 

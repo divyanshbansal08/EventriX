@@ -14,6 +14,7 @@ function ForgotPassword() {
     const [showPasswordInput, setShowPasswordInput] = useState(false);
     const [messageKey, setMessageKey] = useState(0);
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(true);
 
     const handleSendOtp = async (e) => {
         e.preventDefault();
@@ -68,14 +69,22 @@ function ForgotPassword() {
     const handleSetNewPassword = async (e) => {
         e.preventDefault();
         setError('');
-
+        if (newPassword.length < 6) {
+            setError('Password should be atleast 6 characters long');
+            setMessageKey(prevKey => prevKey + 1);
+            return;
+        }
         try {
             const response = await axios.post('http://localhost:5000/api/user/reset-password', { email, newPassword });
             if (response.data.success) {
-                setSuccess('Password reset successful. Redirecting to login page...');
+                setSuccess(response.data.message);
+                setError('');
                 setTimeout(() => navigate('/login'), 2000);
-            } else {
+            }
+            else {
                 setError(response.data.message);
+                setMessageKey(prevKey => prevKey + 1);
+                setSuccess('');
             }
         } catch (error) {
             if (error.response && error.response.data.message) {
@@ -156,18 +165,45 @@ function ForgotPassword() {
                     </form>
                 )}
                 {showPasswordInput && (
-                    <form onSubmit={handleSetNewPassword}>
-                        <Cards
-                            key={3}
-                            type="password"
-                            title="Password*"
-                            placeholder="Enter new password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                        />
-                        <button className="signup_button signup_max-width-full signup_button-1 hover-button-0" type="submit">Reset Password</button>
-                    </form>
+                    <div className="forgotpassword_form_field-wrapper">
+                        <div className="forgotpassword_form_field-wrapper-1">
+                            <label className="signup_form_field-label">Password*</label>
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                                <input
+                                    className="signup_form_input signup_form_input-1"
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Enter Password"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                />
+                                <span
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    style={{
+                                        position: "absolute",
+                                        left: "58%",
+                                        top: "70%",
+                                        transform: "translateY(-50%)",
+                                        cursor: "pointer",
+                                        color: "white"
+                                    }}
+                                >
+                                    {showPassword ? "🙈" : "👁️"}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 )}
+                {showPasswordInput && (
+                    <button
+                        className="forgotpassword_button signup_max-width-full signup_button-1 hover-button-0"
+                        type="submit"
+                        onClick={handleSetNewPassword}
+                    >
+                        Reset Password
+                    </button>
+                )
+                }
+
             </div>
         </div>
     );

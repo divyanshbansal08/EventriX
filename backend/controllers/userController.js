@@ -10,20 +10,28 @@ import jwt from "jsonwebtoken";
 
 export const resetPassword = async (req, res) => {
     const { email, newPassword } = req.body;
-    const user = await User.findOne({ email });
-    const hashedPassword = await hashPassword(newPassword);
 
     if (!email) {
         return res.status(400).json({ success: false, message: 'Email is required.' });
     }
-    if (user.password === newPassword) {
-        return res.status(400).json({ success: false, message: 'Password in use' });
+
+    if (!newPassword || newPassword.length < 6) {
+        return res.status(400).json({ success: false, message: 'Password should be at least 6 characters long.' });
     }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return res.status(404).json({ success: false, message: 'User not found.' });
+    }
+
+    const hashedPassword = await hashPassword(newPassword);
     user.password = hashedPassword;
     await user.save();
 
-    res.json({ success: true, message: 'Password reset successful' });
+    return res.status(200).json({ success: true, message: 'Password reset successful.' });
 };
+
 
 // change password
 export const changePassword = async (req, res) => {
@@ -52,6 +60,10 @@ export const changePassword = async (req, res) => {
         if (newPassword !== confirmNewPassword) {
             console.log("New password is not same");
             return res.status(400).json({ success: false, message: "New password is not same" });
+        }
+        if (newPassword.length < 6) {
+            console.log("Password should be at least 6 characters long");
+            return res.status(400).json({ success: false, message: "Password should be at least 6 characters long" });
         }
         let user = await User.findOne({ username });
         let isAdmin = false;
@@ -266,15 +278,15 @@ export const notifyEvent = async (req, res) => {
         }
 
         if (event.registeredUsers.includes(user._id)) {
-            console.log("Already subscribed to this event");
+            console.log("Already Kept as Reminder");
 
-            return res.status(400).json({ success: false, message: "Already subscribed to this event" });
+            return res.status(400).json({ success: false, message: "Already Kept as Reminder" });
         }
 
         event.registeredUsers.push(user._id);
         await event.save();
-        console.log("Notified successfully");
-        return res.json({ success: true, message: "Notified successfully" });
+        console.log("Kept Reminder successfully");
+        return res.json({ success: true, message: "Kept Reminder successfully" });
     } catch (error) {
         console.error("Error in Notification:", error);
         return res.status(500).json({ success: false, message: "Something went wrong" });
