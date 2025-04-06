@@ -173,19 +173,6 @@ function Right_Logo_admin({ onLogout, onLogin, isLoggedIn }) {
                                     Change Password
                                 </div>
                                 <div
-                                    onClick={handleViewRegisteredUsers}
-                                    style={{
-                                        padding: "12px 20px",
-                                        cursor: "pointer",
-                                        transition: "background-color 0.2s",
-                                        borderBottom: "1px solid #eaeaea"
-                                    }}
-                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f7f7f7"}
-                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
-                                >
-                                    View Registered Users
-                                </div>
-                                <div
                                     onClick={handleAddEvent}
                                     style={{
                                         padding: "12px 20px",
