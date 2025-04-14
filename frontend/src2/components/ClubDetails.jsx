@@ -163,7 +163,7 @@ const ClubDetails = () => {
       <div className="h-16 bg-black"></div>
 
       {/* Banner Image */}
-      <div className="mx-auto mb-12 h-[70vh] w-11/12 md:w-3/4">
+      <div className="mx-auto mb-12 h-[60vh] w-11/12 md:w-3/4">
         <img className="h-full w-full object-fill rounded-xl" src={club.img} alt={club.name} />
       </div>
 
