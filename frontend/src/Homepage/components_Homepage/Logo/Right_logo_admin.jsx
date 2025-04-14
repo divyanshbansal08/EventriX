@@ -156,7 +156,8 @@ function Right_Logo_admin({ onLogout, onLogin, isLoggedIn }) {
                                     padding: "10px 0",
                                     zIndex: 10,
                                     minWidth: "160px",
-                                    overflow: "hidden"
+                                    overflow: "hidden",
+                                    paddingRight: "1rem"
                                 }}
                             >
                                 <div

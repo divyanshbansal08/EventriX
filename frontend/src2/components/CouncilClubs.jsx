@@ -18,7 +18,7 @@ const ClubCard = ({ club }) => {
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-2">{club.name}</h2>
         <p className="text-gray-400 text-sm">{club.shortDesc}</p>
-        <span className="block text-blue-400 mt-3"
+        <span className="cursor-pointer block text-blue-400 mt-3"
         // onClick={() => navigate(`/councils/${club.id}`, {replace: true})}
         >View Club →</span>
       </div>

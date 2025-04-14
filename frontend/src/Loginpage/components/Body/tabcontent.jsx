@@ -128,7 +128,7 @@ function Tabscontent() {
                         <Cards
                             key={2}
                             title="Email*"
-                            placeholder="Your email (abc@gmail.com)"
+                            placeholder="Your email (abc@iitk.ac.in)"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />

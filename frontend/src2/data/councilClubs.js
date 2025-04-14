@@ -29,10 +29,10 @@ const councilClubsData = [
       },
       {
         id: 2,
-        name: "Book Club",
+        name: "Dance Club",
         shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium elit ligula, ut dapibus dui aliquam eget. Nam ut libero at magna accumsan tempus vitae nec mauris. Duis a felis scelerisque lectus vulputate commodo.",
         longDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium elit ligula, ut dapibus dui aliquam eget. Nam ut libero at magna accumsan tempus vitae nec mauris. Duis a felis scelerisque lectus vulputate commodo. Sed dictum metus mauris, vel vehicula odio ullamcorper nec. Nullam ut felis velit. Fusce scelerisque elit lectus, vitae finibus arcu sagittis vel. Fusce hendrerit ultricies libero, eu semper libero volutpat eu.In a pellentesque urna, nec ultrices diam. In efficitur ligula id augue ornare, id congue sem posuere. Suspendisse eget efficitur lacus. Vivamus at convallis nibh. Cras pellentesque facilisis magna, at posuere lectus sodales ut. Nulla tincidunt quam enim, vel porta ex luctus sed. Nunc porttitor a tellus vel porta",
-        img: "/default.jpeg",
+        img: "/danceclub1.jpeg",
         coordinators: [
           {
             name: "John Doe",
@@ -54,7 +54,7 @@ const councilClubsData = [
       },
       {
         id: 3,
-        name: "Dance Club",
+        name: "Book Club",
         shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium elit ligula, ut dapibus dui aliquam eget. Nam ut libero at magna accumsan tempus vitae nec mauris. Duis a felis scelerisque lectus vulputate commodo.",
         longDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium elit ligula, ut dapibus dui aliquam eget. Nam ut libero at magna accumsan tempus vitae nec mauris. Duis a felis scelerisque lectus vulputate commodo. Sed dictum metus mauris, vel vehicula odio ullamcorper nec. Nullam ut felis velit. Fusce scelerisque elit lectus, vitae finibus arcu sagittis vel. Fusce hendrerit ultricies libero, eu semper libero volutpat eu.In a pellentesque urna, nec ultrices diam. In efficitur ligula id augue ornare, id congue sem posuere. Suspendisse eget efficitur lacus. Vivamus at convallis nibh. Cras pellentesque facilisis magna, at posuere lectus sodales ut. Nulla tincidunt quam enim, vel porta ex luctus sed. Nunc porttitor a tellus vel porta",
         img: "../../default.jpeg",
@@ -480,7 +480,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/3"
+        link: "/councils/clubs/snt/19"
       },
       {
         id: 20,
@@ -505,7 +505,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/4"
+        link: "/councils/clubs/snt/20"
       },
       {
         id: 21,
@@ -530,7 +530,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/5"
+        link: "/councils/clubs/snt/21"
       },
       {
         id: 22,
@@ -555,7 +555,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/6"
+        link: "/councils/clubs/snt/22"
       },
       {
         id: 23,
@@ -580,7 +580,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/7"
+        link: "/councils/clubs/snt/23"
       },
       {
         id: 24,
@@ -605,7 +605,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/8"
+        link: "/councils/clubs/snt/24"
       },
       {
         id: 25,
@@ -630,7 +630,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/9"
+        link: "/councils/clubs/snt/25"
       },
       {
         id: 26,
@@ -655,7 +655,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/10"
+        link: "/councils/clubs/snt/26"
       },
       {
         id: 27,
@@ -680,7 +680,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/11"
+        link: "/councils/clubs/snt/27"
       },
       {
         id: 28,
@@ -705,7 +705,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/12"
+        link: "/councils/clubs/snt/28"
       },
       {
         id: 29,
@@ -730,7 +730,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/13"
+        link: "/councils/clubs/snt/29"
       },
       {
         id: 30,
@@ -755,7 +755,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/14"
+        link: "/councils/clubs/snt/30"
       },
       {
         id: 31,
@@ -780,7 +780,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/15"
+        link: "/councils/clubs/snt/31"
       },
       {
         id: 32,
@@ -805,7 +805,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/16"
+        link: "/councils/clubs/snt/32"
       },
       {
         id: 33,
@@ -830,7 +830,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/snt/17"
+        link: "/councils/clubs/snt/33"
       }
     ]
   },
@@ -860,7 +860,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/1"
+        link: "/councils/clubs/gns/34"
       },
       {
         id: 35,
@@ -885,7 +885,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/2"
+        link: "/councils/clubs/gns/35"
       },
       {
         id: 36,
@@ -910,7 +910,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/3"
+        link: "/councils/clubs/gns/36"
       },
       {
         id: 37,
@@ -935,7 +935,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/4"
+        link: "/councils/clubs/gns/37"
       },
       {
         id: 38,
@@ -960,7 +960,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/5"
+        link: "/councils/clubs/gns/38"
       },
       {
         id: 39,
@@ -985,7 +985,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/6"
+        link: "/councils/clubs/gns/39"
       },
       {
         id: 40,
@@ -1010,7 +1010,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/7"
+        link: "/councils/clubs/gns/40"
       },
       {
         id: 41,
@@ -1035,7 +1035,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/8"
+        link: "/councils/clubs/gns/41"
       },
       {
         id: 42,
@@ -1060,7 +1060,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/9"
+        link: "/councils/clubs/gns/42"
       },
       {
         id: 43,
@@ -1085,7 +1085,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/10"
+        link: "/councils/clubs/gns/43"
       },
       {
         id: 44,
@@ -1110,7 +1110,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/11"
+        link: "/councils/clubs/gns/44"
       },
       {
         id: 45,
@@ -1135,7 +1135,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/12"
+        link: "/councils/clubs/gns/45"
       },
       {
         id: 46,
@@ -1160,7 +1160,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/13"
+        link: "/councils/clubs/gns/46"
       },
       {
         id: 47,
@@ -1185,7 +1185,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/14"
+        link: "/councils/clubs/gns/47"
       },
       {
         id: 48,
@@ -1210,7 +1210,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/15"
+        link: "/councils/clubs/gns/48"
       },
       {
         id: 49,
@@ -1235,7 +1235,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/16"
+        link: "/councils/clubs/gns/49"
       },
       {
         id: 50,
@@ -1260,7 +1260,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/17"
+        link: "/councils/clubs/gns/50"
       },
       {
         id: 51,
@@ -1285,7 +1285,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/18"
+        link: "/councils/clubs/gns/51"
       },
       {
         id: 52,
@@ -1310,7 +1310,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/19"
+        link: "/councils/clubs/gns/52"
       },
       {
         id: 53,
@@ -1335,7 +1335,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/20"
+        link: "/councils/clubs/gns/53"
       },
       {
         id: 54,
@@ -1360,7 +1360,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/21"
+        link: "/councils/clubs/gns/54"
       },
       {
         id: 55,
@@ -1385,7 +1385,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/gns/22"
+        link: "/councils/clubs/gns/55"
       }
     ]
   },
@@ -1415,7 +1415,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/1"
+        link: "/councils/clubs/anc/56"
       },
       {
         id: 57,
@@ -1440,7 +1440,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/2"
+        link: "/councils/clubs/anc/57"
       },
       {
         id: 58,
@@ -1465,7 +1465,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/3"
+        link: "/councils/clubs/anc/58"
       },
       {
         id: 59,
@@ -1490,7 +1490,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/4"
+        link: "/councils/clubs/anc/59"
       },
       {
         id: 60,
@@ -1515,7 +1515,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/5"
+        link: "/councils/clubs/anc/60"
       },
       {
         id: 61,
@@ -1540,7 +1540,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/6"
+        link: "/councils/clubs/anc/61"
       },
       {
         id: 62,
@@ -1565,7 +1565,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/7"
+        link: "/councils/clubs/anc/62"
       },
       {
         id: 63,
@@ -1590,7 +1590,7 @@ const councilClubsData = [
             img: "../../defaultprofile.jpeg"
           }
         ],
-        link: "/councils/clubs/anc/8"
+        link: "/councils/clubs/anc/63"
       }
     ]
   }

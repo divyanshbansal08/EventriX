@@ -196,6 +196,74 @@ export const favourites = async (req, res) => {
     }
 };
 
+export const isFavourite = async (req, res) => {
+    const { clubID } = req.params;
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Decoded Token:", decoded);
+
+        const { email } = decoded;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        if (user.clubs.includes(clubID)) {
+            return res.status(200).json({ "success": true, "isFavorite": true });
+        }
+        else {
+            return res.status(200).json({ "success": true, "isFavorite": false });
+        }
+    } catch (error) {
+        console.error("Error in checking subscription:", error);
+        return res.status(500).json({ success: false, message: "Something went wrong" });
+    }
+};
+
+export const unFavourite = async (req, res) => {
+    const { clubID } = req.body;
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Decoded Token:", decoded);
+
+        const { email } = decoded;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        if (user.clubs.includes(clubID)) {
+            user.clubs.pop(clubID);
+            await user.save();
+            return res.json({ success: true, message: "Unsubscribed successfully" });
+        }
+        else {
+            return res.json({ success: false, message: "You are not subscribed to this club" });
+        }
+    } catch (error) {
+        console.error("Error in subscription:", error);
+        return res.status(500).json({ success: false, message: "Something went wrong" });
+    }
+};
+
 export const fetch_favourites = async (req, res) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {

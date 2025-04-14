@@ -48,7 +48,7 @@ const CouncilDetails = () => {
       <div className="h-16 bg-black"></div>
 
       {/* Banner Image */}
-      <div className="mx-auto mb-12 h-[50vh] w-11/12 md:w-3/4">
+      <div className="mx-auto mb-12 h-[70vh] w-11/12 md:w-3/4">
         <img className="h-full w-full object-fill rounded-xl" src={council.imgSrc} alt={council.name} />
       </div>
 
@@ -57,7 +57,7 @@ const CouncilDetails = () => {
         <div className="md:w-1/2 text-3xl font-semibold">
           <p>{council.name},</p>
           <p>IIT Kanpur</p>
-          <button className="bg-white rounded-2xl mt-6 text-black px-4 py-2 text-sm">SUBSCRIBE</button>
+          <button className="cursor-pointer bg-white rounded-2xl mt-6 text-black px-4 py-2 text-sm">SUBSCRIBE</button>
         </div>
 
         <div className="md:w-1/2 mt-4 text-base">
@@ -77,7 +77,7 @@ const CouncilDetails = () => {
               <div className="p-5">
                 <p className="text-2xl">{event.name}</p>
                 <p className="text-sm mt-3">{event.short_description}</p>
-                <button className="mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
+                <button className="cursor-pointer mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
               </div>
             </a>
           </div>
@@ -96,7 +96,7 @@ const CouncilDetails = () => {
               setButtonText("View less"); // Change button text to "View less"
             } // Increment the last index by 3 on button click
           }}
-          className="block mx-auto bg-gray-900 text-white px-4 py-2 rounded-3xl">{buttonText}</button>
+          className="cursor-pointer block mx-auto bg-gray-900 text-white px-4 py-2 rounded-3xl">{buttonText}</button>
       </div>
 
       {/* Coordinators Section */}

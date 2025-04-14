@@ -69,7 +69,7 @@ const CellDetails = () => {
               <div className="p-5">
                 <p className="text-2xl">{event.name}</p>
                 <p className="text-sm mt-3">{event.short_description}</p>
-                <button className="mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
+                <button className="cursor-pointer mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
               </div>
             </a>
           </div>
@@ -88,7 +88,7 @@ const CellDetails = () => {
               setButtonText("View less"); // Change button text to "View less"
             } // Increment the last index by 3 on button click
           }}
-          className="block mx-auto bg-[#282424] text-white px-4 py-2 rounded-3xl">{buttonText}</button>
+          className="cursor-pointer block mx-auto bg-[#282424] text-white px-4 py-2 rounded-3xl">{buttonText}</button>
       </div>
 
       {/* Coordinators Section */}

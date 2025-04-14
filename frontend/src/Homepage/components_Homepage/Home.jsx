@@ -9,7 +9,7 @@ import BackgroundImage from "../Assets_Homepage/main_background.png";
 function Home() {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const [redirectPath, setRedirectPath] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isExiting, setIsExiting] = useState(false);
     const [success, setSuccess] = useState('');
@@ -32,7 +32,10 @@ function Home() {
         setIsLoggedIn(false);
         setIsExiting(true);
     };
-
+    const triggerPageTransition = (path) => {
+        setIsExiting(true);
+        setRedirectPath(path);
+    };
     const handleLogin = () => {
         navigate("/login");
     };
@@ -64,12 +67,14 @@ function Home() {
             <motion.div
                 {...animationProps}
                 onAnimationComplete={() => {
-                    if (isExiting) {
+                    if (isExiting && redirectPath) {
+                        navigate(redirectPath);
+                    } else if (isExiting) {
                         navigate("/home", { state: { loggedOut: true } });
                     }
                 }}
             >
-                <Body />
+                <Body onSearchRedirect={triggerPageTransition} />
             </motion.div>
 
             <div

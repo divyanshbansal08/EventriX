@@ -1,5 +1,5 @@
 import express from 'express';
-import { resetPassword, changePassword, search, favourites, fetch_favourites, notifyEvent } from '../controllers/userController.js'
+import { resetPassword, changePassword, search, favourites, isFavourite, unFavourite, fetch_favourites, notifyEvent } from '../controllers/userController.js'
 
 const router = express.Router();
 
@@ -12,6 +12,10 @@ router.post('/change-password', changePassword)
 router.post('/search', search);
 // favourites
 router.post('/fav', favourites);
+// check fav
+router.get('/isfav/:clubID', isFavourite);
+// unfav
+router.post('/unfav', unFavourite);
 // fetch-favourites
 router.get('/fetch-fav', fetch_favourites);
 // notify-event

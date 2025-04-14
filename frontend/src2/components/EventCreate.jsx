@@ -42,16 +42,32 @@ export default function EventCreationForm() {
     setError('');
 
     try {
+      if (!eventData.eventName) {
+        setError('Enter Event name');
+      }
+      if (!eventData.description) {
+        setError('Enter Description');
+      }
+      if (!eventData.image) {
+        setError('Enter Image');
+      }
+      if (!eventData.date) {
+        setError('Enter Date');
+      }
+      if (!eventData.time) {
+        setError('Enter Time');
+      }
+      if (!eventData.venue) {
+        setError('Enter Venue');
+      }
       const formData = new FormData();
-      formData.append("eventName", eventData.eventName);  // Backend expects "title"
+      formData.append("eventName", eventData.eventName);
       formData.append("description", eventData.description);
       const formattedDate = eventData.date.toISOString().split("T")[0];
       console.log("Formatted Date Type:", typeof formattedDate, "Value:", formattedDate);
       formData.append("date", String(formattedDate));
 
 
-      // Ensure `time` is in "HH:mm" format
-      // Ensure `time` is always in "HH:mm" format
       const formattedTime =
         eventData.time instanceof Date
           ? eventData.time.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
@@ -92,8 +108,9 @@ export default function EventCreationForm() {
           time: new Date(),
           venue: "",
         });
+        setTimeout(() => navigate("/home-admin"), 1000);
       } else {
-        console.log("fail");
+        console.log("fail in adding an event");
         setError(response.data.message);
         setMessageKey(prevKey => prevKey + 1);
 
@@ -203,7 +220,7 @@ export default function EventCreationForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-gray-600 hover:bg-gray-500 transition p-3 rounded-lg font-semibold text-lg mt-3"
+            className="cursor-pointer w-full bg-gray-600 hover:bg-gray-500 transition p-3 rounded-lg font-semibold text-lg mt-3"
           >
             Create Event
           </button>

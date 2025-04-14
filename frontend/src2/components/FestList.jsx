@@ -19,7 +19,7 @@ const FestList = () => {
 
             <div className="mt-4 flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 gap-2">
               <Link to={`/fests/${fest.tag}`}>
-                <button className="bg-white text-black px-4 py-2 font-bold rounded-xl transition transform hover:bg-white hover:text-black hover:scale-110 border border-transparent hover:border-black">
+                <button className="cursor-pointer bg-white text-black px-4 py-2 font-bold rounded-xl transition transform hover:bg-white hover:text-black hover:scale-110 border border-transparent hover:border-black">
                   See More &gt;
                 </button>
               </Link>

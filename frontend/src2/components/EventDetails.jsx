@@ -122,7 +122,7 @@ const EventDetails = () => {
             <img
               src={event.coverImage?.url}
               alt="Event Banner"
-              className="w-full object-fill h-[20%]"
+              className="w-full max-h-[300px] md:max-h-[400px] lg:max-h-[500px] object-cover rounded-xl"
             />
           </div>
 
@@ -131,7 +131,7 @@ const EventDetails = () => {
             <p className="mt-4 text-gray-300 text-lg">
               {event.description}
             </p>
-            <button className="bg-gray-800 rounded-2xl mt-6 text-white px-4 py-2 text-sm transition-transform hover:scale-110 border border-transparent hover:border-black"
+            <button className="cursor-pointer bg-gray-800 rounded-2xl mt-6 text-white px-4 py-2 text-sm transition-transform hover:scale-110 border border-transparent hover:border-black"
               onClick={handleNotify}
             >Notify Me</button>
             <div style={{ position: "relative" }}>
@@ -191,21 +191,34 @@ const EventDetails = () => {
         </div>
       </div>
 
-      <div className="py-16 m-black px-8 bg-black text-white">
-        <p className="text-4xl font-medium text-center">Coordinators</p>
-        <div className="mt-10 flex flex-col md:flex-row flex-wrap justify-center items-center gap-8">
+      <div className="py-8 px-4 bg-black text-white mx-auto">
+        <p className="text-2xl font-medium text-center">Coordinators</p>
+
+        <div className="max-w-screen-md mx-auto mt-8 flex flex-col gap-6">
           {club?.coordinators?.map((coordinator, index) => (
-            <div key={index} className="flex flex-col md:flex-row items-center bg-gray-900 p-5 rounded-xl w-full md:w-3/4 lg:w-1/2">
-              <img className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover" src={coordinator.img} alt={coordinator.name} />
-              <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                <p className="text-xl font-semibold">Name: <span className="italic font-normal">{coordinator.name}</span></p>
-                <p className="text-xl font-semibold mt-2">Email: <span className="italic font-normal">{coordinator.email}</span></p>
-                <p className="text-lg mt-2">Council Coordinator</p>
+            <div
+              key={index}
+              className="flex flex-col md:flex-row items-center bg-gray-900 p-4 rounded-lg shadow-md"
+            >
+              <img
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover"
+                src={coordinator.img}
+                alt={coordinator.name}
+              />
+              <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
+                <p className="text-lg font-semibold">
+                  Name: <span className="italic font-normal">{coordinator.name}</span>
+                </p>
+                <p className="text-lg font-semibold mt-1">
+                  Email: <span className="italic font-normal">{coordinator.email}</span>
+                </p>
+                <p className="text-base mt-1 text-gray-300">Council Coordinator</p>
               </div>
             </div>
           ))}
         </div>
       </div>
+
 
     </>
   );

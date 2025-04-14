@@ -232,7 +232,7 @@ export default function EventUpdateForm() {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-gray-600 hover:bg-gray-500 transition p-3 rounded-lg font-semibold text-lg mt-3"
+                        className="cursor-pointer w-full bg-gray-600 hover:bg-gray-500 transition p-3 rounded-lg font-semibold text-lg mt-3"
                     >
                         Update Event
                     </button>

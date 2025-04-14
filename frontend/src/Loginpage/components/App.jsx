@@ -50,6 +50,9 @@ function App() {
           <Route path="/home" element={
             <Home />
           } />
+          <Route path="/" element={
+            <Home />
+          } />
           <Route path="/home-admin" element={
             <AdminRoute>
               <Home_admin />

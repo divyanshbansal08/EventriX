@@ -1,47 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { motion, AnimatePresence } from "framer-motion";
 
-function Lower() {
+function Lower({ onSearchRedirect }) {
     const [search, setSearch] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [messageKey, setMessageKey] = useState(0);
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSuccess('');
         try {
-            console.log("Sending request to backend...");
-            const response = await axios.post('http://localhost:5000/api/user/search', {
-                search
-            });
-            console.log("Response from backend:", response.data);
+            const response = await axios.post('http://localhost:5000/api/user/search', { search });
 
             if (response.data.success) {
-                console.log(response.data.page);
-                setSuccess(response.data.message);
                 setError('');
+                setSuccess("Redirecting sucessfully...");
                 setTimeout(() => {
-                    navigate(response.data.page);
-                }, 2000);
+                    onSearchRedirect?.(response.data.page);
+                }, 1000);
             } else {
                 setError(response.data.message);
-                setMessageKey(prevKey => prevKey + 1);
+                setMessageKey(prev => prev + 1);
             }
         } catch (error) {
-            if (error.response && error.response.data.message) {
-                setError(error.response.data.message);
-            } else {
-                setError('An error occurred. Please try again.');
-            }
-            setMessageKey(prevKey => prevKey + 1);
+            setError(error.response?.data?.message || 'An error occurred. Please try again.');
+            setMessageKey(prev => prev + 1);
             setSuccess('');
         }
     };
-
 
     return (
         <div className="homepage_body-lower-wrapper">
@@ -49,7 +38,7 @@ function Lower() {
                 <input
                     className="homepage_body-lower-input homepage_body-lower-input-1 homepage_form_input"
                     type="text"
-                    placeholder="Search"
+                    placeholder="Search for CLubs / Events"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
@@ -64,7 +53,7 @@ function Lower() {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0 }}
-                            className="login_message login_message-error"
+                            className="home_message login_message-error"
                             style={{ position: "absolute", top: "20px", left: "35%", right: "35%", textAlign: "center" }}
                         >
                             {error}
@@ -72,7 +61,7 @@ function Lower() {
                     )}
                 </AnimatePresence>
                 {success && (
-                    <div className="login_message login_message-success" style={{ position: "absolute", top: "20px", left: "35%", right: "35%", textAlign: "center" }}>
+                    <div className="home_message login_message-success" style={{ position: "absolute", top: "20px", left: "35%", right: "35%", textAlign: "center" }}>
                         {success}
                     </div>
                 )}
@@ -80,4 +69,6 @@ function Lower() {
         </div>
     );
 }
+
+
 export default Lower;
