@@ -33,7 +33,7 @@ const ClubDetails = () => {
       const timer = setTimeout(() => {
         setSuccess('');
         setError('');
-      }, 3000);
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [success, error]);
@@ -94,7 +94,7 @@ const ClubDetails = () => {
 
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Please log in first.");
+      setError('Please log in first.');
       return;
     }
 
@@ -175,19 +175,19 @@ const ClubDetails = () => {
             <Confetti
               width={window.innerWidth}
               height={window.innerHeight}
-              numberOfPieces={300}
-              recycle={false}
+              numberOfPieces={3000}
+              recycle={true}
             />
           )}
           <AnimatePresence>
             {(success || error) && (
               <motion.div
                 key={messageKey}
-                initial={{ opacity: 0, scale: 0.8, y: -50 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8, y: -20 }}
-                transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
-                className={`fixed top-24 left-1/2 transform -translate-x-1/2 w-[90%] sm:w-[400px] px-6 py-4 rounded-2xl shadow-2xl text-white z-50 ${success
+                initial={{ y: -40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`fixed top-24 left-1/2 transform -translate-x-1/2 w-[90%] sm:w-[400px] px-6 py-4 rounded-2xl shadow-xl text-white z-50 ${success
                   ? "bg-gradient-to-r from-green-500 to-emerald-600"
                   : "bg-gradient-to-r from-red-500 to-rose-600"
                   }`}
@@ -207,12 +207,15 @@ const ClubDetails = () => {
           {subscribed === undefined ? (
             <div className="w-32 h-10 bg-gray-300 animate-pulse rounded-2xl mt-6"></div>
           ) : (
-            <button
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
               onClick={subscribed ? handleUnsubscribe : handleSubscribe}
-              className="w-32 h-10 cursor-pointer bg-white rounded-2xl mt-6 text-black text-sm transition-transform hover:scale-110 border border-transparent hover:border-black"
+              className="w-32 h-10 cursor-pointer bg-white rounded-2xl mt-6 text-black text-sm border border-transparent hover:border-black"
             >
               {subscribed ? "UNSUBSCRIBE" : "SUBSCRIBE"}
-            </button>
+            </motion.button>
           )}
 
         </div>
@@ -232,7 +235,7 @@ const ClubDetails = () => {
 
           <div key={index} className="bg-gray-900 w-full sm:w-1/2 md:w-1/4 rounded-2xl text-white overflow-hidden">
             <a href={`/event/${event._id}`}>
-              <img className="hover:scale-110 transition-all duration-300 w-full h-64 object-cover rounded-t-2xl" src={event.coverImage.url} alt="Event" />
+              <img className="hover:scale-110 transition-all duration-300 w-full h-64 object-cover rounded-t-2xl" src={event.coverImage?.url} alt="Event" />
               <div className="p-5">
                 <p className="text-2xl">{event.name}</p>
                 <p className="text-sm mt-3">{event.short_description}</p>
@@ -250,12 +253,12 @@ const ClubDetails = () => {
         <button
           onClick={() => {
             if (lastIndex === events.length + 1) {
-              setLastIndex(3); // Reset to 3 if all events are shown
-              setButtonText("View all"); // Reset button text to "View all"
+              setLastIndex(3);
+              setButtonText("View all");
             } else {
-              setLastIndex(events.length + 1); // Increment the last index by 3 on button click
-              setButtonText("View less"); // Change button text to "View less"
-            } // Increment the last index by 3 on button click
+              setLastIndex(events.length + 1);
+              setButtonText("View less");
+            }
           }}
           className="cursor-pointer block mx-auto bg-gray-900 text-white px-4 py-2 rounded-3xl">{buttonText}</button>
       </div>

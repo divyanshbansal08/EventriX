@@ -40,26 +40,13 @@ export default function EventCreationForm() {
     e.preventDefault();
     setSuccess('');
     setError('');
-
+    if (!eventData.image) {
+      setError('Upload Image');
+      setMessageKey(prevKey => prevKey + 1);
+      return;
+    }
     try {
-      if (!eventData.eventName) {
-        setError('Enter Event name');
-      }
-      if (!eventData.description) {
-        setError('Enter Description');
-      }
-      if (!eventData.image) {
-        setError('Enter Image');
-      }
-      if (!eventData.date) {
-        setError('Enter Date');
-      }
-      if (!eventData.time) {
-        setError('Enter Time');
-      }
-      if (!eventData.venue) {
-        setError('Enter Venue');
-      }
+
       const formData = new FormData();
       formData.append("eventName", eventData.eventName);
       formData.append("description", eventData.description);

@@ -13,12 +13,16 @@ function Home_admin() {
     const [isExiting, setIsExiting] = useState(false);
     const [success, setSuccess] = useState('');
     const [messageKey, setMessageKey] = useState(0);
+    const [redirectPath, setRedirectPath] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem("adminToken");
         setIsLoggedIn(!!token);
     }, []);
-
+    const triggerPageTransition = (path) => {
+        setIsExiting(true);
+        setRedirectPath(path);
+    };
     useEffect(() => {
         if (location.state && location.state.loggedOut && !success) {
             setSuccess("Logged out successfully");
@@ -62,12 +66,14 @@ function Home_admin() {
             <motion.div
                 {...animationProps}
                 onAnimationComplete={() => {
-                    if (isExiting) {
+                    if (isExiting && redirectPath) {
+                        navigate(redirectPath);
+                    } else if (isExiting) {
                         navigate("/home-admin", { state: { loggedOut: true } });
                     }
                 }}
             >
-                <Body />
+                <Body onSearchRedirect={triggerPageTransition} />
             </motion.div>
 
             <div
