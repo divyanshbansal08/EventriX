@@ -1,6 +1,8 @@
 import React from 'react';
 import { Routes, Route, Router } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import Login from './Login';
 import Home from '../../Homepage/components_Homepage/Home';
 import Signin from './Signin';
@@ -38,47 +40,50 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const location = useLocation();
+
   return (
-    <div className="App">
+    <div className="App bg-black">
       <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/login-admin" element={<Login_admin />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/change-password" element={<Change_password />} />
-          <Route path="/home" element={
-            <Home />
-          } />
-          <Route path="/" element={
-            <Home />
-          } />
-          <Route path="/home-admin" element={
-            <AdminRoute>
-              <Home_admin />
-            </AdminRoute>
-          } />
-          <Route path="/dashboard" element={
-            <Dashboard />
-          } />
-
-          <Route path="/events" element={
-            <AllEvents />
-          } />
-
-          <Route path="/create-event" element={<EventCreationForm />} />
-          <Route path="/update-event" element={<EventUpdateForm />} />
-          <Route path="/cells" element={<CellList />} />
-          <Route path="/fests" element={<FestList />} />
-          <Route path="/cells/:id" element={<CellDetails />} />
-          <Route path="/councils/:id" element={<CouncilDetails />} />
-          <Route path="/fests/:tag" element={<FestDetails />} />
-          <Route path="/councils/clubs/:tag" element={<CouncilClubs />} />
-          <Route path="/councils/clubs/:tag/:id" element={<ClubDetails />} />
-          <Route path="/councils" element={<CouncilList />} />
-          <Route path="/event/:id" element={<EventDetails />} />
-          <Route path="/favourites" element={<Favourites />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="min-h-screen"
+          >
+            <Routes location={location}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/login-admin" element={<Login_admin />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route path="/signin" element={<Signin />} />
+              <Route path="/change-password" element={<Change_password />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/home-admin" element={
+                <AdminRoute>
+                  <Home_admin />
+                </AdminRoute>
+              } />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/events" element={<AllEvents />} />
+              <Route path="/create-event" element={<EventCreationForm />} />
+              <Route path="/update-event" element={<EventUpdateForm />} />
+              <Route path="/cells" element={<CellList />} />
+              <Route path="/fests" element={<FestList />} />
+              <Route path="/cells/:id" element={<CellDetails />} />
+              <Route path="/councils/:id" element={<CouncilDetails />} />
+              <Route path="/fests/:tag" element={<FestDetails />} />
+              <Route path="/councils/clubs/:tag" element={<CouncilClubs />} />
+              <Route path="/councils/clubs/:tag/:id" element={<ClubDetails />} />
+              <Route path="/councils" element={<CouncilList />} />
+              <Route path="/event/:id" element={<EventDetails />} />
+              <Route path="/favourites" element={<Favourites />} />
+            </Routes>
+          </motion.div>
+        </AnimatePresence>
       </QueryClientProvider>
     </div>
   );

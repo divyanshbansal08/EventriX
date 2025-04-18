@@ -13,7 +13,7 @@ function Body({ onSearchRedirect }) {
                             <div className="homepage_body-5">
                                 <Header />
                                 <Middle />
-                                <Lower onSearchRedirect={onSearchRedirect} /> {/* ✅ */}
+                                <Lower onSearchRedirect={onSearchRedirect} />
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import React, { use } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 // import clubs from "../data/clubs";
 import councilClubsData from "../data/councilClubs.js"; // Adjust the import path as necessary
 import { getEventsByClub } from "../api/events.js"; // Adjust the import path as necessary
@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from 'react-confetti';
+import Logo_main from "../../src/Homepage/components_Homepage/Logo_main.jsx";
+import Body from "../../src/Homepage/components_Homepage/Body.jsx";
 
 const ClubDetails = () => {
   const { id } = useParams();
@@ -20,6 +22,9 @@ const ClubDetails = () => {
 
 
   // get events  from backend
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [redirectPath, setRedirectPath] = useState(null);
   const [events, setEvents] = useState([]);
   const [lastIndex, setLastIndex] = useState(3); // State to track the last index of events
   const [buttonText, setButtonText] = useState("View all"); // State to track button text
@@ -27,6 +32,38 @@ const ClubDetails = () => {
   const [success, setSuccess] = useState('');
   const [messageKey, setMessageKey] = useState(0);
   const [subscribed, setSubscribed] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  useEffect(() => {
+    if (location.state && location.state.loggedOut && !success) {
+      setSuccess("Logged out successfully");
+      setMessageKey(prev => prev + 1);
+    }
+  }, [location, success]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setIsExiting(true);
+  };
+  const triggerPageTransition = (path) => {
+    setIsExiting(true);
+    setRedirectPath(path);
+  };
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  const animationProps =
+    location.state && location.state.loggedOut
+      ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.5 } }
+      : { initial: { opacity: 1 }, animate: { opacity: isExiting ? 0 : 1 }, transition: { duration: 0.5 } };
 
   useEffect(() => {
     if (success || error) {
@@ -159,6 +196,37 @@ const ClubDetails = () => {
 
   return (
     <div className="bg-black text-white font-poppins">
+      <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
+      <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 2
+        }}
+      >
+        <AnimatePresence mode="wait">
+          {success && (
+            <motion.div
+              key={messageKey}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+              className="login_message login_message-success"
+              style={{
+                backgroundColor: "#52c41a",
+                color: "white",
+                border: "1px solid #73d13d",
+                boxShadow: "0 0 8px rgba(82, 196, 26, 0.6)"
+              }}
+            >
+              {success}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
       {/* Empty spacing on top */}
       <div className="h-16 bg-black"></div>
 

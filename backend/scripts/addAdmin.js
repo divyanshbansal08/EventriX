@@ -14,11 +14,11 @@ const addAdmin = async () => {
         console.log("Connected to MongoDB");
 
         const adminData = {
-            username: "DanceClubCody",
-            clubID: "2",
-            clubName: "danceclub",
-            email: "danceclub@iitk.ac.in",
-            password: "password_dance",
+            username: "OutreachCellCody",
+            clubID: "70",
+            clubName: "outreachcell",
+            email: "outreachcell@iitk.ac.in",
+            password: "password_outreach",
         };
 
         const existingAdmin = await Admin.findOne({ email: adminData.email });

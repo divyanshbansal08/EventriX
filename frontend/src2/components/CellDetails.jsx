@@ -6,6 +6,9 @@ import cells from "../data/cells";
 import { getEventsByCell } from "../api/events";
 import { useEffect, useState } from "react";
 import "tailwindcss";
+import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import Confetti from 'react-confetti';
 
 const CellDetails = () => {
   const { id } = useParams();
@@ -14,6 +17,10 @@ const CellDetails = () => {
   const [events, setEvents] = useState([]);
   const [lastIndex, setLastIndex] = useState(3); // State to track the last index of events
   const [buttonText, setButtonText] = useState("View all"); // State to track button text
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [messageKey, setMessageKey] = useState(0);
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -33,7 +40,110 @@ const CellDetails = () => {
   if (!cell) {
     return <h1 className="text-white text-center mt-10">Cell Not Found</h1>;
   }
+  useEffect(() => {
+    if (success || error) {
+      const timer = setTimeout(() => {
+        setSuccess('');
+        setError('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [success, error]);
 
+
+  useEffect(() => {
+    const checkIfSubscribed = async () => {
+      const token = localStorage.getItem("token");
+      if (!token || !cell) return;
+
+      try {
+        const response = await axios.get(`http://localhost:5000/api/user/isfav/${cell.id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (response.data.success) {
+          setSubscribed(response.data.isFavorite);
+        }
+      } catch (err) {
+        console.error("Error checking favorite status:", err);
+      }
+    };
+
+    checkIfSubscribed();
+  }, [cell]);
+
+
+  if (!cell) {
+    return <h1 className="text-white text-center mt-10">cell Not Found</h1>;
+  }
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    setSuccess('');
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError('Please log in first.');
+      return;
+    }
+
+    try {
+      console.log("Sending request to backend...");
+      const response = await axios.post('http://localhost:5000/api/user/fav',
+        { clubID: cell.id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("Response from backend:", response.data);
+
+      if (response.data.success) {
+        setSuccess(response.data.message);
+        setError('');
+        setSubscribed(true);
+      } else {
+        setError(response.data.message);
+        setMessageKey(prevKey => prevKey + 1);
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('An error occurred. Please try again.');
+      }
+      setMessageKey(prevKey => prevKey + 1);
+      setSuccess('');
+    }
+  };
+
+  const handleUnsubscribe = async (e) => {
+    e.preventDefault();
+    setSuccess('');
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please log in first.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/api/user/unfav',
+        { clubID: cell.id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data.success) {
+        setSuccess(response.data.message);
+        setError('');
+        setSubscribed(false);
+      } else {
+        setError(response.data.message);
+        setMessageKey(prevKey => prevKey + 1);
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'An error occurred.');
+      setMessageKey(prevKey => prevKey + 1);
+      setSuccess('');
+    }
+  };
   return (
     <div className="bg-black text-white font-poppins">
       {/* Empty spacing on top */}
@@ -47,9 +157,51 @@ const CellDetails = () => {
       {/* Cell Info Section */}
       <div className="flex flex-col md:flex-row justify-between mx-auto w-11/12 md:w-4/5">
         <div className="md:w-1/2 text-3xl font-semibold">
+          {subscribed && success && (
+            <Confetti
+              width={window.innerWidth}
+              height={window.innerHeight}
+              numberOfPieces={3000}
+              recycle={true}
+            />
+          )}
+          <AnimatePresence>
+            {(success || error) && (
+              <motion.div
+                key={messageKey}
+                initial={{ y: -40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`fixed top-24 left-1/2 transform -translate-x-1/2 w-[90%] sm:w-[400px] px-6 py-4 rounded-2xl shadow-xl text-white z-50 ${success
+                  ? "bg-gradient-to-r from-green-500 to-emerald-600"
+                  : "bg-gradient-to-r from-red-500 to-rose-600"
+                  }`}
+              >
+                <div className="flex items-center justify-center gap-3 text-lg font-semibold tracking-wide">
+                  <span className="text-xl">
+                    {success ? "✅" : "❌"}
+                  </span>
+                  <span>{success || error}</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
           <p>{cell.name},</p>
           <p>IIT Kanpur</p>
-          <button className="bg-white rounded-2xl mt-6 text-black px-4 py-2 text-sm">SUBSCRIBE</button>
+          {subscribed === undefined ? (
+            <div className="w-32 h-10 bg-gray-300 animate-pulse rounded-2xl mt-6"></div>
+          ) : (
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              onClick={subscribed ? handleUnsubscribe : handleSubscribe}
+              className="w-32 h-10 cursor-pointer bg-white rounded-2xl mt-6 text-black text-sm border border-transparent hover:border-black"
+            >
+              {subscribed ? "UNSUBSCRIBE" : "SUBSCRIBE"}
+            </motion.button>
+          )}
         </div>
 
         <div className="md:w-1/2 mt-4 text-base">
