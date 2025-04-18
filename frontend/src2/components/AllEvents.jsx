@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getEvents } from "../api/events";
+import Logo_main from "../../src/Homepage/components_Homepage/Logo_main.jsx";
 
 export const AllEvents = () => {
     const { data: events = [], isLoading, isError, error } = useQuery({
@@ -9,6 +10,13 @@ export const AllEvents = () => {
         queryFn: getEvents,
         staleTime: 1000 * 60 * 5,
     });
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        setIsLoggedIn(!!token);
+    }, []);
 
     const formatDate = (dateString) => {
         const options = { weekday: "short", day: "2-digit", month: "short", year: "numeric" };
@@ -18,6 +26,7 @@ export const AllEvents = () => {
     if (isLoading) {
         return (
             <div className="min-h-screen bg-black">
+                <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
                 <section className="py-10 px-5 font-poppins bg-black text-white">
                     <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
                     <div className="text-center text-gray-400">Loading events...</div>
@@ -29,6 +38,7 @@ export const AllEvents = () => {
     if (isError) {
         return (
             <div className="min-h-screen bg-black">
+                <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
                 <section className="py-10 px-5 font-poppins bg-black text-white">
                     <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
                     <div className="text-center text-red-400">{error.message}</div>
@@ -37,10 +47,10 @@ export const AllEvents = () => {
         );
     }
 
-    // Check if 'events' is an array before trying to map over it
     if (!Array.isArray(events)) {
         return (
             <div className="min-h-screen bg-black">
+                <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
                 <section className="py-10 px-5 font-poppins bg-black text-white">
                     <div className="min-h-screen flex flex-col justify-center items-center">
                         <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
@@ -53,6 +63,7 @@ export const AllEvents = () => {
 
     return (
         <div className="min-h-screen bg-black">
+            <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
             <section className="py-10 px-5 font-poppins text-white">
                 <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -60,18 +71,23 @@ export const AllEvents = () => {
                         <motion.a
                             key={event._id}
                             href={`/event/${event._id}`}
-                            className="bg-gray-900 text-white rounded-2xl overflow-hidden shadow-lg"
+                            className="bg-gray-900 text-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             whileHover={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 300 }}
+                            transition={{ 
+                                type: "spring", 
+                                stiffness: 200,
+                                damping: 15,
+                                mass: 0.5
+                            }}
                         >
-                            <img src={event.coverImage.url} alt={event.name} className="w-full h-48 object-cover" />
+                            <img src={event.coverImage?.url} alt={event.eventName} className="w-full h-48 object-cover" />
                             <div className="p-5">
                                 <span className="block text-sm bg-gray-800 text-gray-300 px-3 py-1 rounded-full mb-2">
                                     {formatDate(event.date)} | {event.location}
                                 </span>
-                                <h2 className="text-xl font-semibold mb-2">{event.name}</h2>
+                                <h2 className="text-lg font-semibold mb-2 text-white">{event.eventName}</h2>
                                 <p className="text-gray-400 text-sm mb-4">{event.short_description}</p>
                                 <span className="cursor-pointer text-blue-400 font-medium hover:underline">View event →</span>
                             </div>
@@ -81,7 +97,6 @@ export const AllEvents = () => {
             </section>
         </div>
     );
-
 };
 
 
@@ -171,5 +186,4 @@ export const AllEvents = () => {
 //         </section>
 //     );
 // }
-
 
