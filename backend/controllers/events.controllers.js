@@ -94,6 +94,18 @@ export const createEvent = async (req, res) => {
 
         let coverImageData = {};
 
+        let councilName = 64;
+
+        if (clubID > 16 && clubID < 34) {
+            councilName = 65;
+        } else if (clubID > 33 && clubID < 56) {
+            councilName = 66;
+        } else if (clubID > 55 && clubID < 64) {
+            councilName = 67;
+        } else if (clubID >= 68) {
+            councilName = clubID;
+        }
+
         if (req.file) {
             const uploadResponse = await uploadOnCloudinary(req.file.path);
 
@@ -106,6 +118,7 @@ export const createEvent = async (req, res) => {
         }
 
         const event = new Event({
+            councilName: councilName,
             eventName: eventName,
             short_description: description,
             description: description,
