@@ -29,14 +29,14 @@ const FestList = () => {
   const handleLogout = () => {
     const token = localStorage.getItem("token");
     const adminToken = localStorage.getItem("adminToken");
-    
+
     if (token) {
       localStorage.removeItem("token");
     }
     if (adminToken) {
       localStorage.removeItem("adminToken");
     }
-    
+
     setIsLoggedIn(false);
     setIsExiting(true);
   };
@@ -76,8 +76,8 @@ const FestList = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.02 }}
-              transition={{ 
-                type: "spring", 
+              transition={{
+                type: "spring",
                 stiffness: 200,
                 damping: 15,
                 mass: 0.5
