@@ -10,23 +10,21 @@ const CouncilDetails = () => {
   const council = councils.find((e) => e.id.toString() === id);
 
   const [events, setEvents] = useState([]);
-  const [lastIndex, setLastIndex] = useState(3); // State to track the last index of events
-  const [buttonText, setButtonText] = useState("View all"); // State to track button text
+  const [lastIndex, setLastIndex] = useState(3);
+  const [buttonText, setButtonText] = useState("View all");
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await getEventsByCouncil(council.id); // Fetch events by club ID
-        setEvents(response.data); // Set the events state with the fetched data
-        console.log(response.data); // Log the fetched events for debugging
-
+        const response = await getEventsByCouncil(council.id);
+        setEvents(response.data);
       } catch (error) {
-        console.error("Error fetching events:", error); // Log any errors
+        console.error("Error fetching events:", error);
       }
     };
     fetchEvents();
-  } // Call the fetch function on component mount
-    , []);
+  }, []);
+
   useEffect(() => {
     if (!council) {
       const storedCouncil = sessionStorage.getItem(`council-${id}`);
@@ -57,7 +55,6 @@ const CouncilDetails = () => {
         <div className="md:w-1/2 text-3xl font-semibold">
           <p>{council.name},</p>
           <p>IIT Kanpur</p>
-          <button className="cursor-pointer bg-white rounded-2xl mt-6 text-black px-4 py-2 text-sm">SUBSCRIBE</button>
         </div>
 
         <div className="md:w-1/2 mt-4 text-base">
@@ -69,35 +66,42 @@ const CouncilDetails = () => {
       <p className="text-4xl text-center font-semibold mt-16">Events By {council.name}</p>
 
       <div className="mt-14 flex flex-wrap justify-center gap-6 px-4">
-        {events.slice(0, lastIndex).map((event, index) => (
-
-          <div key={index} className="bg-gray-900 w-full sm:w-1/2 md:w-1/4 rounded-2xl text-white overflow-hidden">
-            <a href={`/event/${event._id}`}>
-              <img className="hover:scale-110 transition-all duration-300 w-full h-64 object-cover rounded-t-2xl" src={event.coverImage.url} alt="Event" />
-              <div className="p-5">
-                <p className="text-2xl">{event.name}</p>
-                <p className="text-sm mt-3">{event.short_description}</p>
-                <button className="cursor-pointer mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
+        {events.length > 0 ? (
+          <>
+            {events.slice(0, lastIndex).map((event, index) => (
+              <div key={index} className="bg-[#282424] w-full sm:w-1/2 md:w-1/3 lg:w-1/4 rounded-2xl text-white overflow-hidden">
+                <a href={`/events/${event._id}`}>
+                  <img className="hover:scale-110 transition-all duration-300 w-full h-48 object-cover rounded-t-2xl" src={event.coverImage?.url} alt="Event" />
+                  <div className="p-4">
+                    <p className="text-lg font-semibold">{event.eventName}</p>
+                    <p className="text-sm mt-2 text-gray-400">{event.short_description}</p>
+                    <button className="cursor-pointer mt-3 text-sm hover:underline hover:scale-110 transition-all duration-300">View Event</button>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        ))}
+            ))}
+          </>
+        ) : (
+          <p className="text-gray-400 text-center w-full">No events available</p>
+        )}
       </div>
 
       {/* View All Button */}
-      <div className="w-full mt-10">
-        <button
-          onClick={() => {
-            if (lastIndex === events.length + 1) {
-              setLastIndex(3); // Reset to 3 if all events are shown
-              setButtonText("View all"); // Reset button text to "View all"
-            } else {
-              setLastIndex(events.length + 1); // Increment the last index by 3 on button click
-              setButtonText("View less"); // Change button text to "View less"
-            } // Increment the last index by 3 on button click
-          }}
-          className="cursor-pointer block mx-auto bg-gray-900 text-white px-4 py-2 rounded-3xl">{buttonText}</button>
-      </div>
+      {events.length > 0 && (
+        <div className="w-full mt-10">
+          <button
+            onClick={() => {
+              if (lastIndex === events.length + 1) {
+                setLastIndex(3); // Reset to 3 if all events are shown
+                setButtonText("View all"); // Reset button text to "View all"
+              } else {
+                setLastIndex(events.length + 1); // Increment the last index by 3 on button click
+                setButtonText("View less"); // Change button text to "View less"
+              }
+            }}
+            className="cursor-pointer block mx-auto bg-[#282424] text-white px-4 py-2 rounded-3xl">{buttonText}</button>
+        </div>
+      )}
 
       {/* Coordinators Section */}
       <div className="mt-16 px-8">

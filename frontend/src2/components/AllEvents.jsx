@@ -83,13 +83,10 @@ export const AllEvents = () => {
                             }}
                         >
                             <img src={event.coverImage?.url} alt={event.eventName} className="w-full h-48 object-cover" />
-                            <div className="p-5">
-                                <span className="block text-sm bg-gray-800 text-gray-300 px-3 py-1 rounded-full mb-2">
-                                    {formatDate(event.date)} | {event.location}
-                                </span>
-                                <h2 className="text-lg font-semibold mb-2 text-white">{event.eventName}</h2>
-                                <p className="text-gray-400 text-sm mb-4">{event.short_description}</p>
-                                <span className="cursor-pointer text-blue-400 font-medium hover:underline">View event →</span>
+                            <div className="p-4">
+                                <p className="text-2xl font-semibold">{event.eventName}</p>
+                                <p className="text-sm mt-2 text-gray-400">{event.short_description}</p>
+                                <button className="cursor-pointer mt-3 text-sm hover:underline hover:scale-110 transition-all duration-300">View Event</button>
                             </div>
                         </motion.a>
                     ))}

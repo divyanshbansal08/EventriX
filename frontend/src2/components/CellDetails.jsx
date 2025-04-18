@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { useParams } from "react-router-dom";
 import cells from "../data/cells";
@@ -8,15 +6,14 @@ import { useEffect, useState } from "react";
 import "tailwindcss";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import Confetti from 'react-confetti';
 
 const CellDetails = () => {
   const { id } = useParams();
   const cell = cells.find((e) => e.id.toString() === id);
 
   const [events, setEvents] = useState([]);
-  const [lastIndex, setLastIndex] = useState(3); // State to track the last index of events
-  const [buttonText, setButtonText] = useState("View all"); // State to track button text
+  const [lastIndex, setLastIndex] = useState(3);
+  const [buttonText, setButtonText] = useState("View all");
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [messageKey, setMessageKey] = useState(0);
@@ -25,31 +22,28 @@ const CellDetails = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await getEventsByCell(cell.id); // Fetch events by club ID
-        setEvents(response.data); // Set the events state with the fetched data
-        console.log(response.data); // Log the fetched events for debugging
-
+        const response = await getEventsByCell(cell.id);
+        setEvents(response.data);
       } catch (error) {
-        console.error("Error fetching events:", error); // Log any errors
+        console.error("Error fetching events:", error);
       }
     };
     fetchEvents();
-  } // Call the fetch function on component mount
-    , []);
+  }, []);
 
   if (!cell) {
     return <h1 className="text-white text-center mt-10">Cell Not Found</h1>;
   }
+
   useEffect(() => {
     if (success || error) {
       const timer = setTimeout(() => {
         setSuccess('');
         setError('');
-      }, 5000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [success, error]);
-
 
   useEffect(() => {
     const checkIfSubscribed = async () => {
@@ -72,10 +66,6 @@ const CellDetails = () => {
     checkIfSubscribed();
   }, [cell]);
 
-
-  if (!cell) {
-    return <h1 className="text-white text-center mt-10">cell Not Found</h1>;
-  }
   const handleSubscribe = async (e) => {
     e.preventDefault();
     setSuccess('');
@@ -144,6 +134,7 @@ const CellDetails = () => {
       setSuccess('');
     }
   };
+
   return (
     <div className="bg-black text-white font-poppins">
       {/* Empty spacing on top */}
@@ -157,14 +148,6 @@ const CellDetails = () => {
       {/* Cell Info Section */}
       <div className="flex flex-col md:flex-row justify-between mx-auto w-11/12 md:w-4/5">
         <div className="md:w-1/2 text-3xl font-semibold">
-          {subscribed && success && (
-            <Confetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-              numberOfPieces={3000}
-              recycle={true}
-            />
-          )}
           <AnimatePresence>
             {(success || error) && (
               <motion.div
@@ -213,35 +196,42 @@ const CellDetails = () => {
       <p className="text-4xl text-center font-semibold mt-16">Events By {cell.name}</p>
 
       <div className="mt-14 flex flex-wrap justify-center gap-6 px-4">
-        {events.slice(0, lastIndex).map((event, index) => (
-
-          <div key={index} className="bg-[#282424] w-full sm:w-1/2 md:w-1/4 rounded-2xl text-white overflow-hidden">
-            <a href={`/events/${event._id}`}>
-              <img className="hover:scale-110 transition-all duration-300 w-full h-64 object-cover rounded-t-2xl" src={event.coverImage.url} alt="Event" />
-              <div className="p-5">
-                <p className="text-2xl">{event.name}</p>
-                <p className="text-sm mt-3">{event.short_description}</p>
-                <button className="cursor-pointer mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
+        {events.length > 0 ? (
+          <>
+            {events.slice(0, lastIndex).map((event, index) => (
+              <div key={index} className="bg-[#282424] w-full sm:w-1/2 md:w-1/4 rounded-2xl text-white overflow-hidden">
+                <a href={`/events/${event._id}`}>
+                  <img className="hover:scale-110 transition-all duration-300 w-full h-64 object-cover rounded-t-2xl" src={event.coverImage.url} alt="Event" />
+                  <div className="p-5">
+                    <p className="text-2xl">{event.name}</p>
+                    <p className="text-sm mt-3">{event.short_description}</p>
+                    <button className="cursor-pointer mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        ))}
+            ))}
+          </>
+        ) : (
+          <p className="text-gray-400 text-center w-full">No events available</p>
+        )}
       </div>
 
       {/* View All Button */}
-      <div className="w-full mt-10">
-        <button
-          onClick={() => {
-            if (lastIndex === events.length + 1) {
-              setLastIndex(3); // Reset to 3 if all events are shown
-              setButtonText("View all"); // Reset button text to "View all"
-            } else {
-              setLastIndex(events.length + 1); // Increment the last index by 3 on button click
-              setButtonText("View less"); // Change button text to "View less"
-            } // Increment the last index by 3 on button click
-          }}
-          className="cursor-pointer block mx-auto bg-[#282424] text-white px-4 py-2 rounded-3xl">{buttonText}</button>
-      </div>
+      {events.length > 0 && (
+        <div className="w-full mt-10">
+          <button
+            onClick={() => {
+              if (lastIndex === events.length + 1) {
+                setLastIndex(3); // Reset to 3 if all events are shown
+                setButtonText("View all"); // Reset button text to "View all"
+              } else {
+                setLastIndex(events.length + 1); // Increment the last index by 3 on button click
+                setButtonText("View less"); // Change button text to "View less"
+              }
+            }}
+            className="cursor-pointer block mx-auto bg-[#282424] text-white px-4 py-2 rounded-3xl">{buttonText}</button>
+        </div>
+      )}
 
       {/* Coordinators Section */}
       <div className="mt-16 px-8">

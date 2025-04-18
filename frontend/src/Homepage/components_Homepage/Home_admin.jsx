@@ -16,13 +16,10 @@ function Home_admin() {
     const [redirectPath, setRedirectPath] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem("adminToken");
-        setIsLoggedIn(!!token);
+        const adminToken = localStorage.getItem("adminToken");
+        setIsLoggedIn(!!adminToken);
     }, []);
-    const triggerPageTransition = (path) => {
-        setIsExiting(true);
-        setRedirectPath(path);
-    };
+
     useEffect(() => {
         if (location.state && location.state.loggedOut && !success) {
             setSuccess("Logged out successfully");
@@ -38,6 +35,11 @@ function Home_admin() {
 
     const handleLogin = () => {
         navigate("/login-admin");
+    };
+
+    const triggerPageTransition = (path) => {
+        setIsExiting(true);
+        setRedirectPath(path);
     };
 
     const animationProps =

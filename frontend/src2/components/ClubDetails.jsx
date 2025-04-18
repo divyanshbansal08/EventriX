@@ -8,7 +8,6 @@ import "tailwindcss";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import Confetti from 'react-confetti';
 import Logo_main from "../../src/Homepage/components_Homepage/Logo_main.jsx";
 import Body from "../../src/Homepage/components_Homepage/Body.jsx";
 
@@ -70,7 +69,7 @@ const ClubDetails = () => {
       const timer = setTimeout(() => {
         setSuccess('');
         setError('');
-      }, 5000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [success, error]);
@@ -197,36 +196,6 @@ const ClubDetails = () => {
   return (
     <div className="bg-black text-white font-poppins">
       <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
-      <div
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 2
-        }}
-      >
-        <AnimatePresence mode="wait">
-          {success && (
-            <motion.div
-              key={messageKey}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
-              className="login_message login_message-success"
-              style={{
-                backgroundColor: "#52c41a",
-                color: "white",
-                border: "1px solid #73d13d",
-                boxShadow: "0 0 8px rgba(82, 196, 26, 0.6)"
-              }}
-            >
-              {success}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
       {/* Empty spacing on top */}
       <div className="h-16 bg-black"></div>
 
@@ -238,15 +207,6 @@ const ClubDetails = () => {
       {/* club Info Section */}
       <div className="flex flex-col md:flex-row justify-between mx-auto w-11/12 md:w-4/5">
         <div className="md:w-1/2 text-3xl font-semibold">
-          {/* Toast Notification */}
-          {subscribed && success && (
-            <Confetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-              numberOfPieces={3000}
-              recycle={true}
-            />
-          )}
           <AnimatePresence>
             {(success || error) && (
               <motion.div
@@ -296,40 +256,43 @@ const ClubDetails = () => {
       {/* Events Section */}
       <p className="text-4xl text-center font-semibold mt-16">Events By {club.name}</p>
 
-
-
       <div className="mt-14 flex flex-wrap justify-center gap-6 px-4">
-        {events.slice(0, lastIndex).map((event, index) => (
-
-          <div key={index} className="bg-gray-900 w-full sm:w-1/2 md:w-1/4 rounded-2xl text-white overflow-hidden">
-            <a href={`/event/${event._id}`}>
-              <img className="hover:scale-110 transition-all duration-300 w-full h-64 object-cover rounded-t-2xl" src={event.coverImage?.url} alt="Event" />
-              <div className="p-5">
-                <p className="text-2xl">{event.name}</p>
-                <p className="text-sm mt-3">{event.short_description}</p>
-                <button className="cursor-pointer mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
+        {events.length > 0 ? (
+          <>
+            {events.slice(0, lastIndex).map((event, index) => (
+              <div key={index} className="bg-[#282424] w-full sm:w-1/2 md:w-1/4 rounded-2xl text-white overflow-hidden">
+                <a href={`/events/${event._id}`}>
+                  <img className="hover:scale-110 transition-all duration-300 w-full h-64 object-cover rounded-t-2xl" src={event.coverImage.url} alt="Event" />
+                  <div className="p-5">
+                    <p className="text-2xl">{event.name}</p>
+                    <p className="text-sm mt-3">{event.short_description}</p>
+                    <button className="cursor-pointer mt-5 text-base hover:underline hover:scale-110 transition-all duration-300 w-">View Event</button>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-
-        ))}
+            ))}
+          </>
+        ) : (
+          <p className="text-gray-400 text-center w-full">No events available</p>
+        )}
       </div>
-
 
       {/* View All Button */}
-      <div className="w-full mt-10">
-        <button
-          onClick={() => {
-            if (lastIndex === events.length + 1) {
-              setLastIndex(3);
-              setButtonText("View all");
-            } else {
-              setLastIndex(events.length + 1);
-              setButtonText("View less");
-            }
-          }}
-          className="cursor-pointer block mx-auto bg-gray-900 text-white px-4 py-2 rounded-3xl">{buttonText}</button>
-      </div>
+      {events.length > 0 && (
+        <div className="w-full mt-10">
+          <button
+            onClick={() => {
+              if (lastIndex === events.length + 1) {
+                setLastIndex(3); // Reset to 3 if all events are shown
+                setButtonText("View all"); // Reset button text to "View all"
+              } else {
+                setLastIndex(events.length + 1); // Increment the last index by 3 on button click
+                setButtonText("View less"); // Change button text to "View less"
+              }
+            }}
+            className="cursor-pointer block mx-auto bg-[#282424] text-white px-4 py-2 rounded-3xl">{buttonText}</button>
+        </div>
+      )}
 
       {/* Coordinators Section */}
       <div className="py-8 px-4 bg-black text-white mx-auto">
