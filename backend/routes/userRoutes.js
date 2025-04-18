@@ -1,5 +1,6 @@
 import express from 'express';
 import { resetPassword, changePassword, search, favourites, isFavourite, unFavourite, fetch_favourites, notifyEvent } from '../controllers/userController.js'
+import { verifyToken } from '../middlewares/authMiddleware.js'; 
 
 const router = express.Router();
 
@@ -7,7 +8,7 @@ const router = express.Router();
 // reset password
 router.post('/reset-password', resetPassword);
 // change password
-router.post('/change-password', changePassword)
+router.post('/change-password', verifyToken, changePassword); 
 // search
 router.post('/search', search);
 // favourites
