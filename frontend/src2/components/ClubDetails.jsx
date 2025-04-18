@@ -206,26 +206,6 @@ const ClubDetails = () => {
           zIndex: 2
         }}
       >
-        <AnimatePresence mode="wait">
-          {success && (
-            <motion.div
-              key={messageKey}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
-              className="login_message login_message-success"
-              style={{
-                backgroundColor: "#52c41a",
-                color: "white",
-                border: "1px solid #73d13d",
-                boxShadow: "0 0 8px rgba(82, 196, 26, 0.6)"
-              }}
-            >
-              {success}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
       {/* Empty spacing on top */}
       <div className="h-16 bg-black"></div>
