@@ -39,12 +39,9 @@ export const changePassword = async (req, res) => {
     try {
         console.log("Changing password...");
 
-        const { username, currentPassword, newPassword, confirmNewPassword } = req.body;
+        const { currentPassword, newPassword, confirmNewPassword } = req.body;
         console.log(req.body);
-        if (!username) {
-            console.log("Enter username");
-            return res.status(400).json({ success: false, message: "Enter username" });
-        }
+       
         if (!currentPassword) {
             console.log("Enter currentPassword");
             return res.status(400).json({ success: false, message: "Enter current password" });
@@ -65,18 +62,21 @@ export const changePassword = async (req, res) => {
             console.log("Password should be at least 6 characters long");
             return res.status(400).json({ success: false, message: "Password should be at least 6 characters long" });
         }
-        let user = await User.findOne({ username });
+        const email = req.user.email;  
+        let user = await User.findOne({ email });  // Find user by email
         let isAdmin = false;
-
+        
         if (!user) {
-            user = await Admin.findOne({ username });
+            // If user is not found, check if the email exists in the Admin collection
+            user = await Admin.findOne({ email });
             isAdmin = true;
         }
-
+        
         if (!user) {
             console.log("User not found.");
             return res.status(404).json({ success: false, message: 'User not found.' });
         }
+
 
         const isMatch = await comparePasswords(currentPassword, user.password);
         if (!isMatch) {
