@@ -31,7 +31,7 @@ function Tabscontent_changepassword() {
             const token = localStorage.getItem("token") || localStorage.getItem("adminToken");
             console.log("Changing password...");
             const changePasswordResponse = await axios.post('http://localhost:5000/api/user/change-password', {
-                
+
                 currentPassword: password,
                 newPassword,
                 confirmNewPassword
@@ -63,7 +63,7 @@ function Tabscontent_changepassword() {
             <div className="signup_signup-form-block">
 
                 <form className="signup_signup-form" onSubmit={handleChangePassword}>
-                   
+
                     <div className="signup_form_field-wrapper">
                         <label className="signup_form_field-label">Current Password*</label>
                         <div style={{ display: "flex", alignItems: "center" }}>

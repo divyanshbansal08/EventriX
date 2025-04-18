@@ -70,7 +70,7 @@ const CouncilDetails = () => {
           <>
             {events.slice(0, lastIndex).map((event, index) => (
               <div key={index} className="bg-[#282424] w-full sm:w-1/2 md:w-1/3 lg:w-1/4 rounded-2xl text-white overflow-hidden">
-                <a href={`/events/${event._id}`}>
+                <a href={`/event/${event._id}`}>
                   <img className="hover:scale-110 transition-all duration-300 w-full h-48 object-cover rounded-t-2xl" src={event.coverImage?.url} alt="Event" />
                   <div className="p-4">
                     <p className="text-lg font-semibold">{event.eventName}</p>
