@@ -38,7 +38,7 @@ function Lower({ onSearchRedirect }) {
                 <input
                     className="homepage_body-lower-input homepage_body-lower-input-1 homepage_form_input"
                     type="text"
-                    placeholder="Search for CLubs / Events"
+                    placeholder="Search for Clubs/Events"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />

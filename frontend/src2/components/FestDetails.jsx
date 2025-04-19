@@ -24,45 +24,56 @@ const FestDetails = () => {
           </div>
         </div>
 
-        <div className=" flex text-white">
-          <p className=" mr-10 w-64 ml-32 text-3xl">
-            {fest.name}, IIT Kanpur
-          </p>
-
-          <div className="ml-12 mr-32 mb-44">
-            <div className="h-6"> </div>
-            <p className="text-sm">{fest.longDesc}</p>
-          </div>
-
+        <div className="flex flex-col md:flex-row justify-between mx-auto w-11/12 md:w-4/5">
+        <div className="md:w-1/2 text-3xl font-semibold">
+          <p>{fest.name},</p>
+          <p>IIT Kanpur</p>
         </div>
 
-        <p className="text-4xl text-white text-center">
+        <div className="md:w-1/2 mt-4 text-base">
+          <p>{fest.longDesc}</p>
+        </div>
+      </div>
+
+        <p className="text-5xl text-white text-center mt-16 font-bold">
           Events Calendar
         </p>
         <div className="flex justify-center mt-12">
-          <div className="mx-16 flex flex-wrap justify-evenly">
-            <img className="w-[45%] object-fill mb-6" src="/images/schedule.png"></img>
-            <img className="w-[45%] object-fill mb-6" src="/images/schedule.png"></img>
-            <img className="w-[45%] object-fill mb-6" src="/images/schedule.png"></img>
-            <img className="w-[45%] object-fill mb-6" src="/images/schedule.png"></img>
+          <div className="mx-16 flex flex-wrap justify-center">
+            <img className="w-[35%] object-fill mx-10 mb-10 rounded-4xl" src="/antaragini1.png"></img>
+            <img className="w-[35%] object-fill mx-10 mb-10 rounded-4xl" src="/antaragini2.png"></img>
+            <img className="w-[35%] object-fill mx-10 mb-10 rounded-4xl" src="/antaragini3.png"></img>
+            <img className="w-[35%] object-fill mx-10 mb-10 rounded-4xl" src="/antaragini4.png"></img>
           </div>
         </div>
 
-        <div className="mt-16 px-8">
-          <p className="text-4xl text-center font-medium">Festival Coordinators</p>
-          <div className="mt-10 flex flex-col md:flex-row flex-wrap justify-center items-center gap-8">
-            {fest.coordinators.map((coordinator, index) => (
-              <div key={index} className="flex flex-col md:flex-row items-center gap-12 p-5 rounded-xl w-full md:w-3/4 lg:w-1/2 bg-gray-900">
-                <img className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover" src={coordinator.img} alt={coordinator.name} />
-                <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                  <p className="text-xl font-semibold">Name: <span className="italic font-normal">{coordinator.name}</span></p>
-                  <p className="text-xl font-semibold mt-2">Email: <span className="italic font-normal">{coordinator.email}</span></p>
-                  <p className="text-lg mt-2">Festival Coordinator</p>
-                </div>
+        <div className="py-8 px-4 bg-black text-white mx-auto">
+        <p className="text-5xl font-bold text-center">Coordinators</p>
+
+        <div className=" mt-8 flex flex-row justify-around">
+          {fest?.coordinators?.map((coordinator, index) => (
+            <div
+              key={index}
+              className="flex flex-col md:flex-row items-center bg-neutral-900 p-4 rounded-lg shadow-md"
+            >
+              <img
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover"
+                src={coordinator.img}
+                alt={coordinator.name}
+              />
+              <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
+                <p className="text-lg font-semibold">
+                  Name: <span className="italic font-normal">{coordinator.name}</span>
+                </p>
+                <p className="text-lg font-semibold mt-1">
+                  Email: <span className="italic font-normal">{coordinator.email}</span>
+                </p>
+                <p className="text-base mt-1 text-gray-300">Festival Coordinator</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
       </div>
     </>
   )
