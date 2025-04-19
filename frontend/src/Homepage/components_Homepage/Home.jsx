@@ -17,7 +17,8 @@ function Home() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        setIsLoggedIn(!!token);
+        const adminToken = localStorage.getItem("adminToken");
+        setIsLoggedIn(!!token || !!adminToken);
     }, []);
 
     useEffect(() => {
@@ -28,16 +29,32 @@ function Home() {
     }, [location, success]);
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
+        const token = localStorage.getItem("token");
+        const adminToken = localStorage.getItem("adminToken");
+
+        if (token) {
+            localStorage.removeItem("token");
+        }
+        if (adminToken) {
+            localStorage.removeItem("adminToken");
+        }
+
         setIsLoggedIn(false);
         setIsExiting(true);
     };
+
+    const handleLogin = () => {
+        const adminToken = localStorage.getItem("adminToken");
+        if (adminToken) {
+            navigate("/login-admin");
+        } else {
+            navigate("/login");
+        }
+    };
+
     const triggerPageTransition = (path) => {
         setIsExiting(true);
         setRedirectPath(path);
-    };
-    const handleLogin = () => {
-        navigate("/login");
     };
 
     const animationProps =
