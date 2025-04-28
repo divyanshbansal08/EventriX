@@ -28,6 +28,7 @@ import EventUpdateForm from '../../../src2/components/EventUpdate';
 import ClubDetails from '../../../src2/components/ClubDetails';
 import { AllEvents } from '../../../src2/components/AllEvents.jsx';
 import Favourites from '../../../src2/components/Favourites.jsx';
+import ScrollToTop from '../../../src2/components/scrollToTop.jsx';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <div className="App bg-black">
+      <ScrollToTop />
       <QueryClientProvider client={queryClient}>
         <AnimatePresence mode="wait">
           <motion.div

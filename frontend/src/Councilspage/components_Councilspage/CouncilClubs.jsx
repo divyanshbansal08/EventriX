@@ -1,7 +1,7 @@
 import React from "react";
 import "../index.css";
 import { useParams } from "react-router-dom";
-import councilClubsData from "../data/councilClubs";
+// import councilClubsData from "../data/councilClubs";
 
 const ClubCard = ({ club }) => {
   return (
@@ -26,6 +26,7 @@ const CouncilClubs = () => {
 
   const { tag } = useParams();
   const council = councilClubsData.find((e) => e.tag.toString() === tag);
+  console.log(council);
 
   return (
     <div className="min-h-screen bg-black text-white py-10 px-5">

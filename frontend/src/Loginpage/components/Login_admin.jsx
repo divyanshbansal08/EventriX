@@ -4,6 +4,7 @@ import Footer_login from "./Footer_login";
 import Logo_main from "../../Homepage/components_Homepage/Logo_main";
 import Body_login_admin from "./Body_login_admin";
 import BackgroundImage from "../assets/login_img.png";
+import Logo_login_admin from "./Logo_login_admin";
 
 
 function Login_admin() {
@@ -12,7 +13,7 @@ function Login_admin() {
             <div className="main-div-login">
                 {/* Left half */}
                 <div className="login-left">
-                    <Logo_login />
+                    <Logo_login_admin />
                     <Body_login_admin />
                     <Footer_login />
                 </div>

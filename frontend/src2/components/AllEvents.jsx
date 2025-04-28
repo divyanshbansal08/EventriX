@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { getEvents } from "../api/events";
 import Logo_main from "../../src/Homepage/components_Homepage/Logo_main.jsx";
+import Logo_main_admin from "../../src/Homepage/components_Homepage/Logo_main.jsx";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export const AllEvents = () => {
     const { data: events = [], isLoading, isError, error } = useQuery({
@@ -12,11 +14,51 @@ export const AllEvents = () => {
     });
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isExiting, setIsExiting] = useState(false);
+    const [success, setSuccess] = useState('');
+    const [messageKey, setMessageKey] = useState(0);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
     }, []);
+    useEffect(() => {
+        if (location.state && location.state.loggedOut && !success) {
+            setSuccess("Logged out successfully");
+            setMessageKey(prev => prev + 1);
+        }
+    }, [location, success]);
+    const handleLogout = () => {
+        const token = localStorage.getItem("token");
+        const adminToken = localStorage.getItem("adminToken");
+
+        if (token) {
+            localStorage.removeItem("token");
+        }
+        if (adminToken) {
+            localStorage.removeItem("adminToken");
+        }
+
+        setIsLoggedIn(false);
+        setIsExiting(true);
+    };
+
+    const handleLogin = () => {
+        const adminToken = localStorage.getItem("adminToken");
+        if (adminToken) {
+            navigate("/login-admin");
+        } else {
+            navigate("/login");
+        }
+    };
+
+    const animationProps = {
+        initial: { opacity: 1 },
+        animate: { opacity: isExiting ? 0 : 1 },
+        transition: { duration: 0.5 }
+    };
 
     const formatDate = (dateString) => {
         const options = { weekday: "short", day: "2-digit", month: "short", year: "numeric" };
@@ -26,7 +68,7 @@ export const AllEvents = () => {
     if (isLoading) {
         return (
             <div className="min-h-screen bg-black">
-                <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
+                <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
                 <section className="py-10 px-5 font-poppins bg-black text-white">
                     <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
                     <div className="text-center text-gray-400">Loading events...</div>
@@ -38,7 +80,7 @@ export const AllEvents = () => {
     if (isError) {
         return (
             <div className="min-h-screen bg-black">
-                <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
+                <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
                 <section className="py-10 px-5 font-poppins bg-black text-white">
                     <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
                     <div className="text-center text-red-400">{error.message}</div>
@@ -50,7 +92,7 @@ export const AllEvents = () => {
     if (!Array.isArray(events)) {
         return (
             <div className="min-h-screen bg-black">
-                <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
+                <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
                 <section className="py-10 px-5 font-poppins bg-black text-white">
                     <div className="min-h-screen flex flex-col justify-center items-center">
                         <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
@@ -63,7 +105,7 @@ export const AllEvents = () => {
 
     return (
         <div className="min-h-screen bg-black">
-            <Logo_main onLogout={() => {}} onLogin={() => {}} isLoggedIn={isLoggedIn} />
+            <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
             <section className="py-10 px-5 font-poppins text-white">
                 <h1 className="text-4xl font-semibold text-center mb-10">Featured Events</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -75,8 +117,8 @@ export const AllEvents = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             whileHover={{ scale: 1.02 }}
-                            transition={{ 
-                                type: "spring", 
+                            transition={{
+                                type: "spring",
                                 stiffness: 200,
                                 damping: 15,
                                 mass: 0.5

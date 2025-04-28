@@ -4,9 +4,9 @@ const councils = [
     name: "Media And Culture",
     tag: "mnc",
     keyword: "Council",
-    shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est.",
+    shortDesc: "The Media and Cultural Council at IITK is a hub for all activities about media and culture. Sounds obvious, right? Obvious as it may be, the implications of that have enriched the campus experience for innumerable students.",
     longDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est. Nullam non tempus orci, non scelerisque ipsum. Aliquam ac vestibulum ligula, nec maximus enim. Donec consequat placerat augue eu luctus. Proin blandit lorem sed justo tristique scelerisque. Aenean placerat ipsum ac venenatis ullamcorper. Sed pulvinar aliquet sapien, eu viverra nisi semper nec. Aliquam nec ultrices justo. Nulla facilisi. Ut vulputate lorem augue, eget feugiat turpis dapibus eu. Nunc dignissim velit id orci tristique ultricies. Donec maximus imperdiet eros vel vehicula. Fusce a pulvinar velit. Suspendisse laoreet leo at tellus rutrum, in accumsan ante pulvinar. Ut vulputate neque quis enim blandit blandit. Nam efficitur lectus leo, eget congue sem dapibus ut. Integer gravida vitae nunc at porttitor.",
+      "The Media and Culture Council (MnC) is the creative and expressive heartbeat of IIT Kanpur, celebrating the diverse cultural spirit of the campus. From music, dance, drama, and photography to design, media, and literary arts — MnC offers students a vibrant platform to explore their passions and showcase their talents.Our mission is to promote cultural awareness, foster creativity, and build a strong sense of community through events, workshops, and competitions. With a vision to inspire artistic expression and holistic development, MnC helps students discover their voice and make lasting memories.",
     imgSrc: "../mnclogo.jpg",
     coordinators: [
       {
@@ -31,9 +31,9 @@ const councils = [
     name: "Science And Technology",
     tag: "snt",
     keyword: "Council",
-    shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est.",
+    shortDesc: "The Science and Technology Council of IIT Kanpur is a hub of innovation and creativity, empowering students to explore and excel in cutting-edge technologies.",
     longDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est. Nullam non tempus orci, non scelerisque ipsum. Aliquam ac vestibulum ligula, nec maximus enim. Donec consequat placerat augue eu luctus. Proin blandit lorem sed justo tristique scelerisque. Aenean placerat ipsum ac venenatis ullamcorper. Sed pulvinar aliquet sapien, eu viverra nisi semper nec. Aliquam nec ultrices justo. Nulla facilisi. Ut vulputate lorem augue, eget feugiat turpis dapibus eu. Nunc dignissim velit id orci tristique ultricies. Donec maximus imperdiet eros vel vehicula. Fusce a pulvinar velit. Suspendisse laoreet leo at tellus rutrum, in accumsan ante pulvinar. Ut vulputate neque quis enim blandit blandit. Nam efficitur lectus leo, eget congue sem dapibus ut. Integer gravida vitae nunc at porttitor.",
+      "The Science and Technology Council of IIT Kanpur is a hub of innovation and creativity, empowering students to explore and excel in cutting-edge technologies.The council encourages innovation and learning and caters to the need of all in the campus community through 20 clubs, hobby groups and teams. Arranging an array of workshops, lectures and competitions, the council is the best place to work and show of your skills.Join us in pioneering the future of technology, where your ideas have the power to ignite innovation, break new ground, and create lasting change in the world. Together, let's turn bold visions into reality.",
     imgSrc: "../sntlogo.jpg",
     coordinators: [
       {
@@ -58,9 +58,9 @@ const councils = [
     name: "Games And Sports",
     tag: "gns",
     keyword: "Council",
-    shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est.",
+    shortDesc: "Games and Sports Council is the voice and face of IIT Kanpur sports community, responsible for management and conduction of all sporting events in the campus.",
     longDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est. Nullam non tempus orci, non scelerisque ipsum. Aliquam ac vestibulum ligula, nec maximus enim. Donec consequat placerat augue eu luctus. Proin blandit lorem sed justo tristique scelerisque. Aenean placerat ipsum ac venenatis ullamcorper. Sed pulvinar aliquet sapien, eu viverra nisi semper nec. Aliquam nec ultrices justo. Nulla facilisi. Ut vulputate lorem augue, eget feugiat turpis dapibus eu. Nunc dignissim velit id orci tristique ultricies. Donec maximus imperdiet eros vel vehicula. Fusce a pulvinar velit. Suspendisse laoreet leo at tellus rutrum, in accumsan ante pulvinar. Ut vulputate neque quis enim blandit blandit. Nam efficitur lectus leo, eget congue sem dapibus ut. Integer gravida vitae nunc at porttitor.",
+      " Games and Sports Council is the voice and face of IIT Kanpur sports community, responsible for management and conduction of all sporting events in the campus. This website is a forum for reaching out to the campus junta and beyond with news, achievements and experiences! A legacy of a determined struggle and expression of selfless passion! Since its conception in 1962, the GnS Council has worked to promote more and more sports in the campus. We have come a long way, and have a lot further to go.",
     imgSrc: "../gnslogo.jpg",
     coordinators: [
       {
@@ -85,9 +85,9 @@ const councils = [
     name: "Academics And Career",
     tag: "anc",
     keyword: "Council",
-    shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est.",
+    shortDesc: "Under the Student's Gymkhana, we are dedicated to empowering students with all their academic, research, and career needs. We are here to assist you with your academic and career-related queries.",
     longDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dapibus tincidunt vehicula. Nullam luctus orci vel lacus porttitor condimentum. Quisque tortor sapien, gravida eget faucibus ut, ultrices vel est. Nullam non tempus orci, non scelerisque ipsum. Aliquam ac vestibulum ligula, nec maximus enim. Donec consequat placerat augue eu luctus. Proin blandit lorem sed justo tristique scelerisque. Aenean placerat ipsum ac venenatis ullamcorper. Sed pulvinar aliquet sapien, eu viverra nisi semper nec. Aliquam nec ultrices justo. Nulla facilisi. Ut vulputate lorem augue, eget feugiat turpis dapibus eu. Nunc dignissim velit id orci tristique ultricies. Donec maximus imperdiet eros vel vehicula. Fusce a pulvinar velit. Suspendisse laoreet leo at tellus rutrum, in accumsan ante pulvinar. Ut vulputate neque quis enim blandit blandit. Nam efficitur lectus leo, eget congue sem dapibus ut. Integer gravida vitae nunc at porttitor.",
+      "The Academic and Career Council (AnC) is dedicated to supporting students in their academic, research, and career journeys. We provide guidance, resources, and opportunities for both undergraduate and postgraduate students to excel academically and professionally.Our mission is to foster student growth through academic support, career counseling, and skill development. With a vision to bridge the gap between academia and industry, AnC strives to nurture future leaders, innovators, and changemakers.",
     imgSrc: "../anclogo.png",
     coordinators: [
       {

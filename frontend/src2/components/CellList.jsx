@@ -68,7 +68,7 @@ const CellList = () => {
         }}
       >
         <div className="text-center p-5 font-poppins">
-          <h1 className="mb-8 text-4xl mt-5 text-white font-semibold">Cells</h1>
+          <p className="mb-8 text-5xl mt-5 text-white font-semibold">Cells</p>
           {cells.map((cell, index) => (
             <motion.div
               key={index}
@@ -84,9 +84,9 @@ const CellList = () => {
               }}
             >
               <div className="text-left w-full md:w-1/2 text-white pl-6 mr-16">
-                <h2 className="text-3xl font-medium">{cell.name}</h2>
-                <h2 className="text-3xl mt-1 mb-3 font-medium">{cell.keyword}</h2>
-                <p className="text-base">{cell.shortDesc}</p>
+                <p className="text-3xl font-medium">{cell.name}</p>
+                <p className="text-3xl mt-1 mb-3 font-medium">{cell.keyword}</p>
+                <p className="text-base text-gray-400">{cell.shortDesc}</p>
                 <div className="mt-4 flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 gap-2">
                   <Link to={`/cells/${cell.id}`}>
                     <button className="cursor-pointer bg-white text-black px-4 py-2 font-bold rounded-xl transition-transform hover:scale-110 border border-transparent hover:border-black">

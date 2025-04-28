@@ -195,7 +195,6 @@ const ClubDetails = () => {
 
   return (
     <div className="bg-black text-white font-poppins">
-      <Logo_main onLogout={handleLogout} onLogin={handleLogin} isLoggedIn={isLoggedIn} />
       {/* Empty spacing on top */}
       <div className="h-16 bg-black"></div>
 
@@ -254,7 +253,7 @@ const ClubDetails = () => {
       </div>
 
       {/* Events Section */}
-      <p className="text-4xl text-center font-semibold mt-16">Events By {club.name}</p>
+      <p className="text-5xl text-center font-bold mt-16">Events By {club.name}</p>
 
       <div className="mt-14 flex flex-wrap justify-center gap-6 px-4">
         {events.length > 0 ? (
@@ -296,13 +295,13 @@ const ClubDetails = () => {
 
       {/* Coordinators Section */}
       <div className="py-8 px-4 bg-black text-white mx-auto">
-        <p className="text-2xl font-medium text-center">Coordinators</p>
+        <p className="text-5xl font-bold text-center">Coordinators</p>
 
-        <div className="max-w-screen-md mx-auto mt-8 flex flex-col gap-6">
+        <div className=" mt-8 flex flex-row justify-around">
           {club?.coordinators?.map((coordinator, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row items-center bg-gray-900 p-4 rounded-lg shadow-md"
+              className="flex flex-col md:flex-row items-center bg-neutral-900 p-4 rounded-lg shadow-md"
             >
               <img
                 className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover"
@@ -316,7 +315,7 @@ const ClubDetails = () => {
                 <p className="text-lg font-semibold mt-1">
                   Email: <span className="italic font-normal">{coordinator.email}</span>
                 </p>
-                <p className="text-base mt-1 text-gray-300">Council Coordinator</p>
+                <p className="text-base mt-1 text-gray-300">Coordinator</p>
               </div>
             </div>
           ))}

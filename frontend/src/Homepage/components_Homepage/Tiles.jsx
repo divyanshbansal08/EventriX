@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 const Tiles = () => {
   const location = useLocation();
 
+
   const navItems = [
     { path: '/home', label: 'Home' },
     { path: '/events', label: 'Events' },
@@ -17,7 +18,7 @@ const Tiles = () => {
     <div className="flex justify-center items-center space-x-8">
       {navItems.map((item) => {
         const isActive = location.pathname === item.path ||
-          (item.path === '/home' && location.pathname === '/');
+          (item.path === 'home' && location.pathname === '/');
 
         return (
           <Link

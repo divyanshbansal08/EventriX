@@ -63,7 +63,7 @@ const CouncilDetails = () => {
       </div>
 
       {/* Events Section */}
-      <p className="text-4xl text-center font-semibold mt-16">Events By {council.name}</p>
+      <p className="text-5xl text-center font-bold mt-16">Events By {council.name}</p>
 
       <div className="mt-14 flex flex-wrap justify-center gap-6 px-4">
         {events.length > 0 ? (
@@ -104,16 +104,28 @@ const CouncilDetails = () => {
       )}
 
       {/* Coordinators Section */}
-      <div className="mt-16 px-8">
-        <p className="text-4xl text-center font-medium">Coordinators</p>
-        <div className="mt-10 flex flex-col md:flex-row flex-wrap justify-center items-center gap-8">
-          {council.coordinators.map((coordinator, index) => (
-            <div key={index} className="flex flex-col md:flex-row items-center gap-12 p-5 rounded-xl w-full md:w-3/4 lg:w-1/2 bg-gray-900">
-              <img className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover" src={coordinator.img} alt={coordinator.name} />
-              <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-                <p className="text-xl font-semibold">Name: <span className="italic font-normal">{coordinator.name}</span></p>
-                <p className="text-xl font-semibold mt-2">Email: <span className="italic font-normal">{coordinator.email}</span></p>
-                <p className="text-lg mt-2">Council Coordinator</p>
+      <div className="py-8 px-4 bg-black text-white mx-auto">
+        <p className="text-5xl font-bold text-center">Coordinators</p>
+
+        <div className=" mt-8 flex flex-row justify-around">
+          {council?.coordinators?.map((coordinator, index) => (
+            <div
+              key={index}
+              className="flex flex-col md:flex-row items-center bg-neutral-900 p-4 rounded-lg shadow-md"
+            >
+              <img
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover"
+                src={coordinator.img}
+                alt={coordinator.name}
+              />
+              <div className="mt-4 md:mt-0 md:ml-4 text-center md:text-left">
+                <p className="text-lg font-semibold">
+                  Name: <span className="italic font-normal">{coordinator.name}</span>
+                </p>
+                <p className="text-lg font-semibold mt-1">
+                  Email: <span className="italic font-normal">{coordinator.email}</span>
+                </p>
+                <p className="text-base mt-1 text-gray-300">Council Coordinator</p>
               </div>
             </div>
           ))}

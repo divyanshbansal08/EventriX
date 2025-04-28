@@ -192,13 +192,13 @@ const EventDetails = () => {
       </div>
 
       <div className="py-8 px-4 bg-black text-white mx-auto">
-        <p className="text-2xl font-medium text-center">Coordinators</p>
+        <p className="text-4xl font-medium text-center">Coordinators</p>
 
-        <div className="max-w-screen-md mx-auto mt-8 flex flex-col gap-6">
+        <div className=" mt-8 flex flex-row justify-around">
           {club?.coordinators?.map((coordinator, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row items-center bg-gray-900 p-4 rounded-lg shadow-md"
+              className="flex flex-col md:flex-row items-center bg-neutral-900 p-4 rounded-lg shadow-md"
             >
               <img
                 className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover"
