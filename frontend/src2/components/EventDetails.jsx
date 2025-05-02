@@ -57,7 +57,7 @@ const EventDetails = () => {
 
     try {
       console.log("Sending request to backend...");
-      const response = await axios.post('http://localhost:5000/api/user/notify-event',
+      const response = await axios.post('https://testproject-k2cs.onrender.com/api/user/notify-event',
         { _id: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

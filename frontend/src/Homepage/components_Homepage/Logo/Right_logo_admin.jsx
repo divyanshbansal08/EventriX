@@ -60,7 +60,7 @@ function Right_Logo_admin({ onLogout, onLogin, isLoggedIn }) {
             const encodedEventName = encodeURIComponent(eventName.trim());
 
             const response = await axios.delete(
-                `http://localhost:5000/api/event/admin/deleteEvent/${encodedEventName}`,
+                `https://testproject-k2cs.onrender.com/api/event/admin/deleteEvent/${encodedEventName}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -98,7 +98,7 @@ function Right_Logo_admin({ onLogout, onLogin, isLoggedIn }) {
             console.log("Fetching event details from backend...");
             const encodedEventName = encodeURIComponent(eventName.trim());
 
-            const response = await axios.get(`http://localhost:5000/api/event/eventByName/${encodedEventName}`);
+            const response = await axios.get(`https://testproject-k2cs.onrender.com/api/event/eventByName/${encodedEventName}`);
 
             console.log("Response from backend:", response.data);
             if (response.data.success) {

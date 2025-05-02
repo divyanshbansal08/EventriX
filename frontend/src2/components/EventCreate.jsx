@@ -72,7 +72,7 @@ export default function EventCreationForm() {
       }
       const token = localStorage.getItem("adminToken");
       const response = await axios.post(
-        "http://localhost:5000/api/event/admin/createEvent",
+        "https://testproject-k2cs.onrender.com/api/event/admin/createEvent",
         formData,
         {
           headers: {

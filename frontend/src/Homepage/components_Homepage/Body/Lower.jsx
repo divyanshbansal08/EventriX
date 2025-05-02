@@ -13,7 +13,7 @@ function Lower({ onSearchRedirect }) {
         e.preventDefault();
         setSuccess('');
         try {
-            const response = await axios.post('http://localhost:5000/api/user/search', { search });
+            const response = await axios.post('https://testproject-k2cs.onrender.com/api/user/search', { search });
 
             if (response.data.success) {
                 setError('');

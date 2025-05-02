@@ -10,7 +10,6 @@ import '../../Councilspage/styles_Councilspage/styles_councilspage.css'
 import Logo_main from '../../Homepage/components_Homepage/Logo_main';
 import ForgotPassword from './Forgot_password';
 import Dashboard from './dashboard';
-import ProtectedRoute from './protectedroute';
 import Change_password from './Change_password';
 import Home_admin from '../../Homepage/components_Homepage/Home_admin';
 import AdminRoute from './AdminRoute';

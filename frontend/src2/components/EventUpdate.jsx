@@ -103,7 +103,7 @@ export default function EventUpdateForm() {
             const encodedEventName = encodeURIComponent(eventData1[0].eventName.trim());
 
             const response = await axios.put(
-                `http://localhost:5000/api/event/admin/updateEvent/${encodedEventName}`,
+                `https://testproject-k2cs.onrender.com/api/event/admin/updateEvent/${encodedEventName}`,
                 formData,
                 {
                     headers: {

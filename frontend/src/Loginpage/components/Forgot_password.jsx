@@ -21,7 +21,7 @@ function ForgotPassword() {
         setSuccess('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/otp/send-otp', {
+            const response = await axios.post('https://testproject-k2cs.onrender.com/api/otp/send-otp', {
                 email,
                 isForgotPassword: true
             });
@@ -48,7 +48,7 @@ function ForgotPassword() {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/otp/verify-otp', { email, otp });
+            const response = await axios.post('https://testproject-k2cs.onrender.com/api/otp/verify-otp', { email, otp });
             if (response.data.success) {
                 setShowPasswordInput(true);
                 setSuccess('OTP verified. Set your new password.');
@@ -75,7 +75,7 @@ function ForgotPassword() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:5000/api/user/reset-password', { email, newPassword });
+            const response = await axios.post('https://testproject-k2cs.onrender.com/api/user/reset-password', { email, newPassword });
             if (response.data.success) {
                 setSuccess(response.data.message);
                 setError('');

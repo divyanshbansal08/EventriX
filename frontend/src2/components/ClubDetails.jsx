@@ -81,7 +81,7 @@ const ClubDetails = () => {
       if (!token || !club) return;
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/user/isfav/${club.id}`, {
+        const response = await axios.get(`https://testproject-k2cs.onrender.com/api/user/isfav/${club.id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -136,7 +136,7 @@ const ClubDetails = () => {
 
     try {
       console.log("Sending request to backend...");
-      const response = await axios.post('http://localhost:5000/api/user/fav',
+      const response = await axios.post('https://testproject-k2cs.onrender.com/api/user/fav',
         { clubID: club.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -173,7 +173,7 @@ const ClubDetails = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/user/unfav',
+        'https://testproject-k2cs.onrender.com/api/user/unfav',
         { clubID: club.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

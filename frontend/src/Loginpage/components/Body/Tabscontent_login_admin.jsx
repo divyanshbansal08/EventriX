@@ -22,7 +22,7 @@ function Tabscontent_login_admin() {
         setSuccess('');
         try {
             console.log("Sending request to backend...");
-            const response = await axios.post('http://localhost:5000/api/admin/login', {
+            const response = await axios.post('https://testproject-k2cs.onrender.com/api/admin/login', {
                 email,
                 password
             });

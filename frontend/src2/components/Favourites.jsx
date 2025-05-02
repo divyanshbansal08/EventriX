@@ -10,7 +10,7 @@ const Favourites = () => {
             const token = localStorage.getItem("token");
 
             try {
-                const response = await axios.get("http://localhost:5000/api/user/fetch-fav", {
+                const response = await axios.get("https://testproject-k2cs.onrender.com/api/user/fetch-fav", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 console.log("API Response:", response.data);

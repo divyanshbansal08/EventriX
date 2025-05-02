@@ -30,7 +30,7 @@ function Tabscontent_changepassword() {
         try {
             const token = localStorage.getItem("token") || localStorage.getItem("adminToken");
             console.log("Changing password...");
-            const changePasswordResponse = await axios.post('http://localhost:5000/api/user/change-password', {
+            const changePasswordResponse = await axios.post('https://testproject-k2cs.onrender.com/api/user/change-password', {
 
                 currentPassword: password,
                 newPassword,

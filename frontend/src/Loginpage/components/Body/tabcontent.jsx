@@ -57,7 +57,7 @@ function Tabscontent() {
 
         try {
             console.log("Sending OTP request to backend...");
-            const response = await axios.post('http://localhost:5000/api/otp/send-otp', {
+            const response = await axios.post('https://testproject-k2cs.onrender.com/api/otp/send-otp', {
                 email,
                 isForgotPassword: false
             });
@@ -87,11 +87,11 @@ function Tabscontent() {
         setSuccess('');
         try {
             console.log("Verifying OTP...");
-            const otpResponse = await axios.post('http://localhost:5000/api/otp/verify-otp', { email, otp });
+            const otpResponse = await axios.post('https://testproject-k2cs.onrender.com/api/otp/verify-otp', { email, otp });
             console.log("Verified OTP...");
             if (otpResponse.data.success) {
                 console.log("Verified OTP... Success");
-                const signUpResponse = await axios.post('http://localhost:5000/api/auth/signin', { username, email, password });
+                const signUpResponse = await axios.post('https://testproject-k2cs.onrender.com/api/auth/signin', { username, email, password });
                 console.log("Verified OTP... Success... Signin");
                 if (signUpResponse.data.success) {
                     console.log("Verified OTP... Success... Signin Success");

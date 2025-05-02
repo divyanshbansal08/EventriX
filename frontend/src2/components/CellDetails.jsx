@@ -51,7 +51,7 @@ const CellDetails = () => {
       if (!token || !cell) return;
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/user/isfav/${cell.id}`, {
+        const response = await axios.get(`https://testproject-k2cs.onrender.com/api/user/isfav/${cell.id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -78,7 +78,7 @@ const CellDetails = () => {
 
     try {
       console.log("Sending request to backend...");
-      const response = await axios.post('http://localhost:5000/api/user/fav',
+      const response = await axios.post('https://testproject-k2cs.onrender.com/api/user/fav',
         { clubID: cell.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -115,7 +115,7 @@ const CellDetails = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/user/unfav',
+        'https://testproject-k2cs.onrender.com/api/user/unfav',
         { clubID: cell.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

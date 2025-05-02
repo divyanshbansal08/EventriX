@@ -16,7 +16,7 @@ const Dashboard = () => {
             }
 
             try {
-                const response = await axios.get('http://localhost:5000/api/protected/dashboard', {
+                const response = await axios.get('https://testproject-k2cs.onrender.com/api/protected/dashboard', {
                     headers: { 'Authorization': `Bearer ${token}` }  // Add 'Bearer ' prefix here
                 });
                 setMessage(response.data.message);
