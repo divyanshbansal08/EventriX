@@ -15,7 +15,9 @@ const ClubDetails = () => {
   const { id } = useParams();
   const { tag } = useParams(); // Get the tag from the URL parameters
   const council = councilClubsData.find((council) => council.tag === tag); // Find the council by tag
-  const club = council?.clubs.find((club) => club.id.toString() === id); // Find the club by ID within the council
+  const initialClub = council?.clubs.find((club) => club.id.toString() === id);
+  const [club, setClub] = useState(initialClub);
+  // Find the club by ID within the council
   console.log(club, council);
 
 
@@ -99,7 +101,8 @@ const ClubDetails = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await getEventsByClub(club.id); // Fetch events by club ID
+        if (!club) return;
+        const response = await getEventsByClub(club.id);
         setEvents(response.data); // Set the events state with the fetched data
         console.log(response.data); // Log the fetched events for debugging
 
