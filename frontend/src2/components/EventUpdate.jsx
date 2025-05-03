@@ -5,7 +5,6 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import { Upload } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Event from "../../../backend/models/events.models";
 import "tailwindcss";
 
 export default function EventUpdateForm() {
