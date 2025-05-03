@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: react-app
+    buildCommand: npm run build
+    startCommand: npm run start
+    routes:
+      - src: /(.*)
+        dest: /index.html
