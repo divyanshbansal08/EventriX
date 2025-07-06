@@ -1,4 +1,4 @@
- Eventrix
+ EventriX
 
 Eventrix is a student community event management platform designed to streamline the discovery, creation, and management of events across campus clubs, councils, cells, and fests. It provides a modern interface for both students and coordinators, with seamless email notifications and personalized event tracking.
 
@@ -97,9 +97,9 @@ npm run dev
 - Comments or feedback section for past events.
 
  Contributors
+- Divyansh Bansal
 - Jayant Mitawa
 - Priyen Parmar
-- Divyansh Bansal
 - Rahman
 - Mohit Parihar
 - Pranav Krishna
